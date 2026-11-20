@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { ArrowDownRight, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { ConsultationForm } from '@/components/consultation-form'
+import { PriceCalculator } from '@/components/price-calculator'
 
 const projects = [
   {
@@ -70,6 +71,7 @@ export function StudioLanding() {
         <nav className="main-nav" aria-label="Головна навігація">
           <a href="#projects">Проєкти</a>
           <a href="#services">Послуги</a>
+          <a href="#calculator">Калькулятор</a>
           <a href="#about">Про студію</a>
         </nav>
         <a className="header-contact" href="#contact">
@@ -160,9 +162,11 @@ export function StudioLanding() {
         </div>
       </section>
 
+      <PriceCalculator />
+
       <section className="contact-section" id="contact" aria-labelledby="contact-title">
         <div className="contact-copy">
-          <p className="eyebrow contact-kicker"><span className="eyebrow-dot" /> 04 / Почнемо з розмови</p>
+          <p className="eyebrow contact-kicker"><span className="eyebrow-dot" /> 05 / Почнемо з розмови</p>
           <h2 id="contact-title">Маєте місце,<br />яке хочеться <em>відчути?</em></h2>
           <p className="contact-lead">Розкажіть трохи про нього — ми зв’яжемося, щоб домовитись про першу зустріч.</p>
           <div className="contact-details">
