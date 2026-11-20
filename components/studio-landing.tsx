@@ -62,9 +62,9 @@ export function StudioLanding() {
   return (
     <main>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Студія інтер’єру — на початок сторінки">
-          студія
-          <small>інтер’єру</small>
+        <a className="wordmark" href="#top" aria-label="huge world of design — на початок сторінки">
+          huge world
+          <small>of design</small>
         </a>
         <nav className="main-nav" aria-label="Головна навігація">
           <a href="#projects">Проєкти</a>
@@ -79,7 +79,7 @@ export function StudioLanding() {
 
       <section className="hero" id="top" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <p className="eyebrow"><span className="eyebrow-dot" /> Київ · Україна · Працюємо всюди</p>
+          <p className="eyebrow"><span className="eyebrow-dot" /> Одеса · Україна · Працюємо всюди</p>
           <h1 id="hero-title">huge world<br />of <em>design</em></h1>
           <div className="hero-bottom">
             <p>Створюємо інтер’єри, що відчуваються вашими — у кожній деталі, фактурі й ранковому промені.</p>
@@ -101,7 +101,7 @@ export function StudioLanding() {
             <a className="text-link" href="#contact">Познайомитись зі студією <ArrowRight aria-hidden="true" /></a>
           </div>
         </div>
-        <div className="studio-note"><span>Простір із сенсом</span><span>Заснована у 2018</span><span>Київ · Львів · всюди</span></div>
+        <div className="studio-note"><span>Простір із сенсом</span><span>Заснована у 2018</span><span>Одеса · Україна · всюди</span></div>
       </section>
 
       <ProjectCarousel projects={projects} />
@@ -144,10 +144,10 @@ export function StudioLanding() {
       </section>
 
       <footer className="site-footer">
-        <a className="wordmark footer-wordmark" href="#top">студія<small>інтер’єру</small></a>
+        <a className="wordmark footer-wordmark" href="#top">huge world<small>of design</small></a>
         <p>Створено з увагою до життя.</p>
         <a className="back-top" href="#top">На початок <ArrowUpRight aria-hidden="true" /></a>
-        <span className="copyright">© 2025 Студія інтер’єру</span>
+        <span className="copyright">© 2025 huge world of design</span>
       </footer>
     </main>
   )

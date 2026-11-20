@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'huge world of design — студія інтер’єру',
-  description: 'Створюємо інтер’єри з відчуттям дому. Портфоліо, послуги й консультації студії інтер’єру.',
+  title: 'huge world of design — студія інтер’єру в Одесі',
+  description: 'huge world of design — студія інтер’єру з Одеси. Створюємо простори в Україні й працюємо всюди.',
   generator: 'v0.app',
   icons: {
     icon: [
