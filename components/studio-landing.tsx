@@ -1,7 +1,8 @@
-import Image from 'next/image'
 import { ArrowDownRight, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { ConsultationForm } from '@/components/consultation-form'
 import { PriceCalculator } from '@/components/price-calculator'
+import { ProjectCarousel } from '@/components/project-carousel'
+import { HeroPhotoCarousel } from '@/components/hero-photo-carousel'
 
 const projects = [
   {
@@ -11,7 +12,6 @@ const projects = [
     area: '86 м²',
     image: '/project-apartment.png',
     alt: 'Світла вітальня з дубовою підлогою, дерев’яним столом і м’яким денним світлом',
-    className: 'project-card project-card-tall',
   },
   {
     number: '02',
@@ -20,7 +20,6 @@ const projects = [
     area: '142 м²',
     image: '/project-house.png',
     alt: 'Спальня заміського будинку в теплих природних відтінках',
-    className: 'project-card project-card-offset',
   },
   {
     number: '03',
@@ -29,7 +28,6 @@ const projects = [
     area: '74 м²',
     image: '/project-cafe.png',
     alt: 'Інтер’єр кав’ярні зі світлою штукатуркою та бордовою м’якою лавою',
-    className: 'project-card project-card-wide',
   },
 ]
 
@@ -82,7 +80,7 @@ export function StudioLanding() {
       <section className="hero" id="top" aria-labelledby="hero-title">
         <div className="hero-copy">
           <p className="eyebrow"><span className="eyebrow-dot" /> Київ · Україна · Працюємо всюди</p>
-          <h1 id="hero-title">Простір,<br />у якому <em>добре</em><br />бути собою.</h1>
+          <h1 id="hero-title">huge world<br />of <em>design</em></h1>
           <div className="hero-bottom">
             <p>Створюємо інтер’єри, що відчуваються вашими — у кожній деталі, фактурі й ранковому промені.</p>
             <a className="round-link" href="#projects" aria-label="Перейти до проєктів">
@@ -90,18 +88,7 @@ export function StudioLanding() {
             </a>
           </div>
         </div>
-        <div className="hero-visual">
-          <Image
-            src="/studio-hero.png"
-            alt="Сонячна вітальня у природній палітрі з м’яким диваном і скульптурним столиком"
-            fill
-            priority
-            sizes="(max-width: 760px) 100vw, 55vw"
-            className="hero-image"
-          />
-          <div className="image-caption"><span>01 / 03</span><span>Квартира на Подолі · 2025</span></div>
-          <span className="hero-stamp" aria-hidden="true">простір<br />для життя</span>
-        </div>
+        <HeroPhotoCarousel />
         <div className="hero-index"><span>Інтер’єри з відчуттям дому</span><span>01 — 04</span></div>
       </section>
 
@@ -117,30 +104,7 @@ export function StudioLanding() {
         <div className="studio-note"><span>Тихо — простір із сенсом</span><span>Заснована у 2018</span><span>Київ · Львів · всюди</span></div>
       </section>
 
-      <section className="projects section-shell" id="projects" aria-labelledby="projects-title">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow section-kicker">02 / Обране</p>
-            <h2 id="projects-title">Простори, що<br /><em>розповідають.</em></h2>
-          </div>
-          <p className="section-heading-note">Кожен проєкт починається з розмови<br />і закінчується відчуттям «це моє».</p>
-        </div>
-        <div className="project-grid">
-          {projects.map((project) => (
-            <a className={project.className} href="#contact" key={project.number}>
-              <div className="project-image-wrap">
-                <Image src={project.image} alt={project.alt} fill sizes="(max-width: 760px) 100vw, 45vw" />
-                <span className="project-number">{project.number}</span>
-                <span className="project-arrow" aria-hidden="true"><ArrowUpRight /></span>
-              </div>
-              <div className="project-meta">
-                <div><h3>{project.name}</h3><p>{project.type}</p></div>
-                <span>{project.area}</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
+      <ProjectCarousel projects={projects} />
 
       <section className="services section-shell" id="services" aria-labelledby="services-title">
         <div className="services-intro">
