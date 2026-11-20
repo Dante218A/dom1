@@ -95,12 +95,10 @@
   font: 34px/0.8 Georgia, 'Times New Roman', serif;
   letter-spacing: -2px;
 }
-.wordmark > span { color: var(--accent); }
 .wordmark small {
   margin-top: 9px;
   font: 9px/1 Arial, Helvetica, sans-serif;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 .main-nav { display: flex; align-items: center; gap: clamp(24px, 4vw, 62px); }
 .main-nav a, .header-contact { font-size: 12px; letter-spacing: 0.015em; }

@@ -62,9 +62,9 @@ export function StudioLanding() {
   return (
     <main>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Тихо — на початок сторінки">
-          тихо<span>.</span>
-          <small>студія інтер’єру</small>
+        <a className="wordmark" href="#top" aria-label="Студія інтер’єру — на початок сторінки">
+          студія
+          <small>інтер’єру</small>
         </a>
         <nav className="main-nav" aria-label="Головна навігація">
           <a href="#projects">Проєкти</a>
@@ -101,7 +101,7 @@ export function StudioLanding() {
             <a className="text-link" href="#contact">Познайомитись зі студією <ArrowRight aria-hidden="true" /></a>
           </div>
         </div>
-        <div className="studio-note"><span>Тихо — простір із сенсом</span><span>Заснована у 2018</span><span>Київ · Львів · всюди</span></div>
+        <div className="studio-note"><span>Простір із сенсом</span><span>Заснована у 2018</span><span>Київ · Львів · всюди</span></div>
       </section>
 
       <ProjectCarousel projects={projects} />
@@ -144,10 +144,10 @@ export function StudioLanding() {
       </section>
 
       <footer className="site-footer">
-        <a className="wordmark footer-wordmark" href="#top">тихо<span>.</span><small>студія інтер’єру</small></a>
+        <a className="wordmark footer-wordmark" href="#top">студія<small>інтер’єру</small></a>
         <p>Створено з увагою до життя.</p>
         <a className="back-top" href="#top">На початок <ArrowUpRight aria-hidden="true" /></a>
-        <span className="copyright">© 2025 Тихо</span>
+        <span className="copyright">© 2025 Студія інтер’єру</span>
       </footer>
     </main>
   )
