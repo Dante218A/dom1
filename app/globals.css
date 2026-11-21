@@ -81,14 +81,24 @@
 }
 
 .site-header {
-  position: relative;
-  z-index: 20;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  isolation: isolate;
   width: min(100%, 1600px);
   margin: 0 auto;
   padding: 18px 5vw 6px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  z-index: -1;
+  background: var(--background);
+  border-bottom: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
 }
 .header-top { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
 .header-search {
@@ -139,7 +149,7 @@ iframe.skiptranslate, .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame
 .goog-text-highlight { background: none !important; box-shadow: none !important; }
 
 .faq-section { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 72px; align-items: start; }
-.faq-intro { position: sticky; top: 140px; display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+.faq-intro { position: sticky; top: 180px; display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
 .faq-intro h2 { margin: 0; font-family: var(--font-serif); font-weight: 400; font-size: clamp(40px, 4.4vw, 64px); line-height: 1.02; letter-spacing: -0.035em; text-wrap: balance; }
 .faq-intro h2 em { color: var(--accent); }
 .faq-lead { max-width: 420px; margin: 0; color: var(--muted-foreground); font-size: 15px; line-height: 1.65; }
@@ -214,8 +224,8 @@ iframe.skiptranslate, .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame
 .main-nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: clamp(12px, 1.4vw, 26px);
+  justify-content: flex-start;
+  gap: clamp(20px, 3vw, 48px);
   padding-top: 8px;
   border-top: 1px solid var(--border);
 }
@@ -796,7 +806,7 @@ iframe.skiptranslate, .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame
   .stage-media, .stage-content { animation: none; }
 }
 .services { padding-top: 145px; padding-bottom: 150px; display: grid; grid-template-columns: 0.72fr 1.28fr; gap: 7vw; align-items: start; }
-.services-intro { position: sticky; top: 110px; }
+.services-intro { position: sticky; top: 170px; }
 .services h2 { margin-top: 35px; }
 .services-copy { max-width: 330px; margin: 27px 0 28px; }
 .services-toc { display: flex; flex-direction: column; margin: 0 0 30px; border-top: 1px solid var(--border); }
@@ -1247,7 +1257,7 @@ input:focus-visible + .calc-box { outline: 2px solid var(--ring); outline-offset
 .testimonial-card .testimonial-facts dd { font-size: 15px; }
 
 .advantages { padding-top: 140px; padding-bottom: 140px; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 6vw; align-items: start; background: var(--muted); box-shadow: 0 0 0 100vmax var(--muted); clip-path: inset(0 -100vmax); }
-.advantages-intro { position: sticky; top: 120px; display: flex; flex-direction: column; align-items: flex-start; }
+.advantages-intro { position: sticky; top: 170px; display: flex; flex-direction: column; align-items: flex-start; }
 .advantages-lead { margin: 26px 0 0; max-width: 440px; color: var(--muted-foreground); font-size: 15px; line-height: 1.7; }
 .advantages-promises { display: flex; flex-direction: column; gap: 12px; margin: 30px 0 38px; padding: 0; list-style: none; }
 .advantages-promises li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; line-height: 1.5; }

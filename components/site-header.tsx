@@ -22,7 +22,7 @@ import { STUDIO_PHONE, STUDIO_PHONE_HREF, pageHref, siteSections, type SiteSecti
 const SERVICES_HREF = '/#services'
 
 type NavItem =
-  | { kind: 'link'; label: string; href: string; emphasis?: boolean }
+  | { kind: 'link'; label: string; href: string; emphasis?: boolean; menuOnly?: boolean }
   | { kind: 'mega'; label: string; id: 'services' | 'objects' }
   | { kind: 'menu'; label: string; id: string; section: SiteSection }
 
@@ -33,15 +33,17 @@ const navItems: NavItem[] = [
   { kind: 'mega', label: 'Послуги та ціни', id: 'services' },
   { kind: 'link', label: 'Наші роботи', href: '/#projects' },
   { kind: 'mega', label: 'Об’єкти', id: 'objects' },
-  { kind: 'link', label: 'Відгуки', href: pageHref('vidhuky') },
+  { kind: 'link', label: 'Відгуки', href: pageHref('vidhuky'), menuOnly: true },
   { kind: 'link', label: 'Калькулятор', href: '/#calculator' },
-  { kind: 'link', label: 'Акції', href: pageHref('aktsii') },
-  { kind: 'link', label: 'Оплата', href: pageHref('oplata') },
-  { kind: 'link', label: 'Блог', href: pageHref('blog') },
-  { kind: 'link', label: 'Співпраця', href: pageHref('spivpratsia') },
-  { kind: 'link', label: 'Вакансії', href: pageHref('vakansii') },
-  { kind: 'link', label: 'Контакти', href: pageHref('kontakty') },
+  { kind: 'link', label: 'Акції', href: pageHref('aktsii'), menuOnly: true },
+  { kind: 'link', label: 'Оплата', href: pageHref('oplata'), menuOnly: true },
+  { kind: 'link', label: 'Блог', href: pageHref('blog'), menuOnly: true },
+  { kind: 'link', label: 'Співпраця', href: pageHref('spivpratsia'), menuOnly: true },
+  { kind: 'link', label: 'Вакансії', href: pageHref('vakansii'), menuOnly: true },
+  { kind: 'link', label: 'Контакти', href: pageHref('kontakty'), menuOnly: true },
 ]
+
+const mainNavItems = navItems.filter((item) => !(item.kind === 'link' && item.menuOnly))
 
 const CLOSE_DELAY_MS = 260
 
@@ -333,7 +335,7 @@ export function SiteHeader() {
       </div>
 
       <nav className="main-nav" aria-label="Головна навігація" ref={navRef}>
-        {navItems.map((item) => {
+        {mainNavItems.map((item) => {
           if (item.kind === 'link') {
             return (
               <Link className={item.emphasis ? 'is-emphasis' : undefined} href={item.href} key={item.label}>
