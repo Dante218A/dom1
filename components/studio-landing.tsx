@@ -9,77 +9,14 @@ import { SiteHeader } from '@/components/site-header'
 import { ServicesSection } from '@/components/services-section'
 import { StagesSection } from '@/components/stages-section'
 import { SiteFooter } from '@/components/site-footer'
+import { AdvantagesSection } from '@/components/advantages-section'
+import { TestimonialsSection } from '@/components/testimonials-section'
+import { projects } from '@/lib/projects'
 
 const studioValues = [
   { title: 'Індивідуально', text: 'Жодних шаблонів — інтер’єр відповідає вашому ритму життя.' },
   { title: 'Прозоро', text: 'Фіксована вартість, терміни та погодження кожного етапу.' },
   { title: 'До результату', text: 'Авторський нагляд, комплектація та супровід ремонту.' },
-]
-
-const projects = [
-  {
-    number: '01',
-    name: 'Теплий мінімалізм',
-    style: 'Мінімалізм',
-    type: 'Квартира · Київ',
-    area: '86 м²',
-    image: '/project-apartment.png',
-    alt: 'Світла вітальня з дубовою підлогою, дерев’яним столом і м’яким денним світлом',
-  },
-  {
-    number: '02',
-    name: 'Тиша і дерево',
-    style: 'Японді',
-    type: 'Квартира · Одеса',
-    area: '72 м²',
-    image: '/images/styles/japandi.png',
-    alt: 'Вітальня в стилі японді з низькими дубовими меблями, лляним диваном і паперовою лампою',
-  },
-  {
-    number: '03',
-    name: 'Квартира на Пушкінській',
-    style: 'Неокласика',
-    type: 'Історичний будинок · Одеса',
-    area: '128 м²',
-    image: '/images/styles/neoclassic.png',
-    alt: 'Неокласична вітальня з ліпниною, мармуровим каміном і оксамитовими кріслами',
-  },
-  {
-    number: '04',
-    name: 'Дім серед тиші',
-    style: 'Сучасний еко',
-    type: 'Приватний будинок · Львівщина',
-    area: '142 м²',
-    image: '/project-house.png',
-    alt: 'Спальня заміського будинку в теплих природних відтінках',
-  },
-  {
-    number: '05',
-    name: 'Цегла і світло',
-    style: 'Лофт',
-    type: 'Пентхаус · Київ',
-    area: '110 м²',
-    image: '/images/styles/loft.png',
-    alt: 'Лофт із цегляною стіною, великими вікнами в металевих рамах і шкіряним диваном',
-  },
-  {
-    number: '06',
-    name: 'Вечеря о восьмій',
-    style: 'Ар-деко',
-    type: 'Квартира · Одеса',
-    area: '95 м²',
-    image: '/images/styles/artdeco.png',
-    alt: 'Їдальня в стилі ар-деко з оксамитовими стільцями, мармуровим столом і латунними деталями',
-  },
-  {
-    number: '07',
-    name: 'Кава і повільні ранки',
-    style: 'Комерційний',
-    type: 'Кав’ярня · Львів',
-    area: '74 м²',
-    image: '/project-cafe.png',
-    alt: 'Інтер’єр кав’ярні зі світлою штукатуркою та бордовою м’якою лавою',
-  },
 ]
 
 export function StudioLanding() {
@@ -150,6 +87,10 @@ export function StudioLanding() {
       </section>
 
       <ProjectCarousel projects={projects} />
+
+      <TestimonialsSection />
+
+      <AdvantagesSection />
 
       <ServicesSection />
 
