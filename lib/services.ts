@@ -121,6 +121,30 @@ export const serviceCategories: ServiceCategory[] = [
   },
 ]
 
+export type RateUnit = 'area' | 'fixed' | 'visit' | 'hour' | 'meeting' | 'percent'
+
+export type ServiceRate = {
+  rate: number
+  unit: RateUnit
+  defaultQuantity?: number
+}
+
+export const serviceRates: Record<string, ServiceRate> = {
+  'obmiry-ta-planuvannia': { rate: 350, unit: 'area' },
+  'kontseptsiia-ta-mudbordy': { rate: 300, unit: 'area' },
+  '3d-vizualizatsiia': { rate: 700, unit: 'area' },
+  'robocha-dokumentatsiia': { rate: 600, unit: 'area' },
+  'pidbir-materialiv-ta-mebliv': { rate: 250, unit: 'area' },
+  'koshtorys-i-vidomosti': { rate: 8000, unit: 'fixed' },
+  'lohistyka-ta-zamovlennia': { rate: 7, unit: 'percent', defaultQuantity: 500000 },
+  'vyizdy-na-obiekt': { rate: 2500, unit: 'visit', defaultQuantity: 4 },
+  'koryhuvannia-proektu': { rate: 1200, unit: 'hour', defaultQuantity: 3 },
+  'konsultatsiia-maistriv': { rate: 2000, unit: 'meeting', defaultQuantity: 2 },
+  'razova-konsultatsiia': { rate: 3000, unit: 'fixed' },
+  'planuvalne-rishennia': { rate: 450, unit: 'area' },
+  dekoruvannia: { rate: 25000, unit: 'fixed' },
+}
+
 export function serviceHref(slug: string) {
   return `/posluhy/${slug}`
 }
