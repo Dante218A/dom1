@@ -10,13 +10,11 @@ import {
   ChevronRight,
   MapPin,
   Menu,
-  MessageCircle,
-  Phone,
   Plus,
   Search,
-  Send,
   X,
 } from 'lucide-react'
+import { LanguageSwitcher } from '@/components/language-switcher'
 import { serviceCategories, serviceHref } from '@/lib/services'
 import { objectCategories, objectHref } from '@/lib/objects'
 import { STUDIO_PHONE, STUDIO_PHONE_HREF, pageHref, siteSections, type SiteSection } from '@/lib/site-pages'
@@ -43,12 +41,6 @@ const navItems: NavItem[] = [
   { kind: 'link', label: 'Співпраця', href: pageHref('spivpratsia') },
   { kind: 'link', label: 'Вакансії', href: pageHref('vakansii') },
   { kind: 'link', label: 'Контакти', href: pageHref('kontakty') },
-]
-
-const messengers = [
-  { label: 'Telegram', href: 'https://t.me/', icon: Send },
-  { label: 'Viber', href: 'viber://chat?number=%2B380487000000', icon: MessageCircle },
-  { label: 'WhatsApp', href: 'https://wa.me/380487000000', icon: Phone },
 ]
 
 const CLOSE_DELAY_MS = 260
@@ -318,16 +310,7 @@ export function SiteHeader() {
             <MapPin aria-hidden="true" />
             Одеса
           </span>
-          <ul className="header-messengers" aria-label="Месенджери">
-            {messengers.map(({ label, href, icon: Icon }) => (
-              <li key={label}>
-                <a href={href} aria-label={label} title={label} target="_blank" rel="noopener noreferrer">
-                  <Icon aria-hidden="true" />
-                </a>
-              </li>
-            ))}
-          </ul>
-          <span className="header-lang" aria-label="Мова сайту: українська">UA</span>
+          <LanguageSwitcher />
           <a className="header-phone" href={STUDIO_PHONE_HREF}>{STUDIO_PHONE}</a>
         </div>
 

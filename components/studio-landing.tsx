@@ -11,6 +11,7 @@ import { StagesSection } from '@/components/stages-section'
 import { SiteFooter } from '@/components/site-footer'
 import { AdvantagesSection } from '@/components/advantages-section'
 import { TestimonialsSection } from '@/components/testimonials-section'
+import { FaqSection } from '@/components/faq-section'
 import { projects } from '@/lib/projects'
 
 const studioValues = [
@@ -98,9 +99,11 @@ export function StudioLanding() {
 
       <PriceCalculator />
 
+      <FaqSection />
+
       <section className="contact-section" id="contact" aria-labelledby="contact-title">
         <div className="contact-copy">
-          <p className="eyebrow contact-kicker"><span className="eyebrow-dot" /> 08 / Почнемо з розмови</p>
+          <p className="eyebrow contact-kicker"><span className="eyebrow-dot" /> 09 / Почнемо з розмови</p>
           <h2 id="contact-title">Маєте місце,<br />яке хочеться <em>відчути?</em></h2>
           <p className="contact-lead">Розкажіть трохи про нього — ми зв’яжемося, щоб домовитись про першу зустріч.</p>
           <div className="contact-details">
