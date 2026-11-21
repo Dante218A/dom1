@@ -22,13 +22,14 @@ import { STUDIO_PHONE, STUDIO_PHONE_HREF, pageHref, siteSections, type SiteSecti
 const SERVICES_HREF = '/#services'
 
 type NavItem =
-  | { kind: 'link'; label: string; href: string; emphasis?: boolean; menuOnly?: boolean }
+  | { kind: 'link'; label: string; href: string; emphasis?: boolean; menuOnly?: boolean; home?: boolean }
   | { kind: 'mega'; label: string; id: 'services' | 'objects' }
   | { kind: 'menu'; label: string; id: string; section: SiteSection }
 
 const sectionBySlug = (slug: string) => siteSections.find((section) => section.slug === slug)!
 
 const navItems: NavItem[] = [
+  { kind: 'link', label: 'Головна', href: '/', home: true },
   { kind: 'menu', label: 'Про нас', id: 'pro-nas', section: sectionBySlug('pro-nas') },
   { kind: 'mega', label: 'Послуги та ціни', id: 'services' },
   { kind: 'link', label: 'Наші роботи', href: '/#projects' },
@@ -49,6 +50,7 @@ const CLOSE_DELAY_MS = 260
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [mobileOpen, setMobileOpen] = useState<string | null>(null)
   const [activeObjectCategory, setActiveObjectCategory] = useState(objectCategories[0].slug)
@@ -83,7 +85,26 @@ export function SiteHeader() {
     setMobileOpen(null)
   }
 
+  function handleHomeClick(event: React.MouseEvent<HTMLAnchorElement>) {
+    closeMobileMenu()
+    closeDropdown()
+    if (window.location.pathname === '/') {
+      event.preventDefault()
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      if (window.location.hash) history.replaceState(null, '', '/')
+    }
+  }
+
   useEffect(() => cancelClose, [])
+
+  useEffect(() => {
+    function handleScroll() {
+      setIsScrolled(window.scrollY > 40)
+    }
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     if (!isMenuOpen && !openDropdown) return
@@ -292,7 +313,7 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="site-header">
+    <header className={`site-header${isScrolled ? ' is-scrolled' : ''}`}>
       <div className="header-top">
         <Link className="brand-link" href="/" aria-label="huge world of design — на головну">
           <BrandLogo />
@@ -338,7 +359,12 @@ export function SiteHeader() {
         {mainNavItems.map((item) => {
           if (item.kind === 'link') {
             return (
-              <Link className={item.emphasis ? 'is-emphasis' : undefined} href={item.href} key={item.label}>
+              <Link
+                className={item.emphasis ? 'is-emphasis' : undefined}
+                href={item.href}
+                key={item.label}
+                onClick={item.home ? handleHomeClick : undefined}
+              >
                 {item.label}
               </Link>
             )
@@ -358,7 +384,7 @@ export function SiteHeader() {
             const number = <span>{String(index + 1).padStart(2, '0')}</span>
             if (item.kind === 'link') {
               return (
-                <Link href={item.href} key={item.label} onClick={closeMobileMenu}>
+                <Link href={item.href} key={item.label} onClick={item.home ? handleHomeClick : closeMobileMenu}>
                   {number}
                   {item.label}
                 </Link>

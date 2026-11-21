@@ -99,6 +99,12 @@
   z-index: -1;
   background: var(--background);
   border-bottom: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+  transition: background-color 280ms ease, backdrop-filter 280ms ease;
+}
+.site-header.is-scrolled::before {
+  background: color-mix(in oklab, var(--background) 68%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
 }
 .header-top { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
 .header-search {
@@ -224,7 +230,7 @@ iframe.skiptranslate, .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame
 .main-nav {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: clamp(20px, 3vw, 48px);
   padding-top: 8px;
   border-top: 1px solid var(--border);
