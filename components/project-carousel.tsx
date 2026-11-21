@@ -1,12 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import { useRef, useState, type KeyboardEvent } from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 
 type Project = {
   number: string
   name: string
+  style: string
   type: string
   area: string
   image: string
@@ -21,6 +22,15 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
   const viewportRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+
+  useEffect(() => {
+    if (isPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = window.setTimeout(() => {
+      goToSlide(activeIndex === projects.length - 1 ? 0 : activeIndex + 1)
+    }, 5000)
+    return () => window.clearTimeout(timer)
+  })
 
   function goToSlide(index: number) {
     const nextIndex = Math.max(0, Math.min(projects.length - 1, index))
@@ -72,7 +82,22 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
           <p className="eyebrow section-kicker">02 / Обране</p>
           <h2 id="projects-title">Простори, що<br /><em>розповідають.</em></h2>
         </div>
-        <p className="section-heading-note">Кожен проєкт починається з розмови<br />і закінчується відчуттям «це моє».</p>
+        <div className="section-heading-aside">
+          <p className="section-heading-note">Кожен проєкт починається з розмови<br />і закінчується відчуттям «це моє».</p>
+          <div className="project-style-chips" role="group" aria-label="Стилі інтер’єру">
+            {projects.map((project, index) => (
+              <button
+                key={project.number}
+                type="button"
+                className={`project-style-chip${index === activeIndex ? ' is-active' : ''}`}
+                aria-pressed={index === activeIndex}
+                onClick={() => goToSlide(index)}
+              >
+                {project.style}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div
@@ -83,6 +108,11 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
         tabIndex={0}
         onScroll={updateActiveSlide}
         onKeyDown={handleKeyDown}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onFocus={() => setIsPaused(true)}
+        onBlur={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
       >
         <div className="project-carousel-track" ref={trackRef}>
           {projects.map((project, index) => (
@@ -97,6 +127,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
                 <div className="project-image-wrap">
                   <Image src={project.image} alt={project.alt} fill sizes="(max-width: 760px) 88vw, 72vw" />
                   <span className="project-number">{project.number}</span>
+                  <span className="project-style">{project.style}</span>
                   <span className="project-arrow" aria-hidden="true"><ArrowUpRight /></span>
                 </div>
                 <div className="project-meta">
