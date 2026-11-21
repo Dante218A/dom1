@@ -2,56 +2,82 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Check, Clock, FileCheck } from 'lucide-react'
 
-const stages = [
+type Stage = {
+  title: string
+  short: string
+  duration: string
+  result: string
+  image: string
+  alt: string
+  steps: { title: string; text: string }[]
+}
+
+const stages: Stage[] = [
   {
     title: 'Знайомство, обміри та ТЗ',
     short: 'Обміри й бриф',
+    duration: '1–3 дні',
+    result: 'Обмірний план і заповнений бриф',
     image: '/images/stages/stage-1.png',
     alt: 'Дизайнер вимірює стіну лазерним далекоміром у порожній квартирі',
-    points: [
-      'Дизайнер виїжджає на об’єкт, робить точні заміри всіх стін, висот, вікон і комунікацій (або замовляє лазерне 3D-сканування).',
-      'Замовник заповнює анкету (бриф): описує свій спосіб життя, склад сім’ї, побажання щодо стилю, необхідну техніку та орієнтовний бюджет на ремонт.',
+    steps: [
+      { title: 'Зустріч на об’єкті', text: 'Знайомимось, обговорюємо задачі, оглядаємо приміщення.' },
+      { title: 'Точні обміри', text: 'Заміряємо стіни, висоти, вікна й комунікації або робимо лазерне 3D-сканування.' },
+      { title: 'Бриф', text: 'Ви описуєте спосіб життя, склад сім’ї, стиль, потрібну техніку та орієнтовний бюджет.' },
     ],
   },
   {
     title: 'Планувальне рішення',
     short: 'Зонування',
+    duration: '5–7 днів',
+    result: 'Затверджене планування з меблями',
     image: '/images/stages/stage-2.png',
     alt: 'Ескізи планувань квартири з варіантами розстановки меблів',
-    points: [
-      'Розробляються 2–4 варіанти зонування приміщення та розстановки меблів.',
-      'На цьому етапі закладається ергономіка: чи зручно відкриватимуться двері, чи достатньо місця для проходу, де стоятиме пральна машина тощо.',
+    steps: [
+      { title: '2–4 варіанти', text: 'Пропонуємо кілька сценаріїв зонування та розстановки меблів.' },
+      { title: 'Ергономіка', text: 'Перевіряємо проходи, відкривання дверей, місця для техніки та зберігання.' },
+      { title: 'Погодження', text: 'Доопрацьовуємо обраний варіант і фіксуємо фінальне планування.' },
     ],
   },
   {
     title: 'Стильова концепція',
     short: 'Мудборди',
+    duration: '5–7 днів',
+    result: 'Мудборди для кожної кімнати',
     image: '/images/stages/stage-3.png',
     alt: 'Мудборд зі зразками тканин, каменю, дерева та фарби',
-    points: [
-      'Дизайнер підбирає референси (приклади), кольорову гаму, основні матеріали та текстури для кожної кімнати, щоб узгодити загальний настрій інтер’єру.',
+    steps: [
+      { title: 'Референси', text: 'Збираємо приклади інтер’єрів, що передають ваш настрій.' },
+      { title: 'Палітра й матеріали', text: 'Підбираємо кольори, текстури, камінь, дерево, тканини.' },
+      { title: 'Мудборди', text: 'Збираємо концепцію по кожній кімнаті та погоджуємо її з вами.' },
     ],
   },
   {
     title: '3D-візуалізація',
     short: 'Візуалізація',
+    duration: '2–4 тижні',
+    result: 'Фотореалістичні ракурси всіх приміщень',
     image: '/images/stages/stage-4.png',
     alt: 'Фотореалістична візуалізація вітальні з бежевим диваном і травертиновим столиком',
-    points: [
-      'Створюються фотореалістичні зображення майбутнього інтер’єру.',
-      'Це дозволяє замовнику побачити, як поєднуються кольори, меблі та освітлення ще до початку витрат на ремонт.',
+    steps: [
+      { title: '3D-модель', text: 'Будуємо точну модель простору з меблями та освітленням.' },
+      { title: 'Ракурси', text: 'Готуємо фотореалістичні зображення кожної кімнати.' },
+      { title: 'Правки', text: 'Коригуємо кольори й деталі, доки результат вам не сподобається.' },
     ],
   },
   {
     title: 'Робоча документація',
     short: 'Креслення',
+    duration: '2–3 тижні',
+    result: 'Альбом креслень для будівельників',
     image: '/images/stages/stage-5.png',
     alt: 'Альбом технічних креслень квартири з планами електрики та освітлення',
-    points: [
-      'Готується альбом технічних креслень для будівельників: плани демонтажу та монтажу перегородок.',
-      'Схеми розташування розеток, вимикачів, світильників і сантехніки, плани підлоги, стелі та розкладки плитки.',
+    steps: [
+      { title: 'Будівельні плани', text: 'Плани демонтажу та монтажу перегородок, підлоги та стелі.' },
+      { title: 'Інженерні схеми', text: 'Розетки, вимикачі, світильники, сантехніка, розкладка плитки.' },
+      { title: 'Передача альбому', text: 'Видаємо готовий альбом і пояснюємо його вашій бригаді.' },
     ],
   },
 ]
@@ -61,7 +87,7 @@ const pad = (n: number) => String(n).padStart(2, '0')
 export function StagesSection() {
   const [active, setActive] = useState(0)
   const stage = stages[active]
-  const progress = ((active + 1) / stages.length) * 100
+  const progress = (active / (stages.length - 1)) * 100
 
   const go = (delta: number) => setActive((current) => (current + delta + stages.length) % stages.length)
 
@@ -75,10 +101,16 @@ export function StagesSection() {
         <p className="stages-lead">Кожен етап завершується погодженням — ви точно знаєте, що отримаєте, ще до початку ремонту.</p>
       </header>
 
-      <div className="stages-body">
-        <div className="stages-nav" role="tablist" aria-label="Етапи роботи" style={{ '--stage-progress': `${progress}%` } as React.CSSProperties}>
-          <span className="stages-rail" aria-hidden="true" />
-          {stages.map((item, index) => (
+      <div
+        className="stages-map"
+        role="tablist"
+        aria-label="Схема етапів роботи"
+        style={{ '--stage-progress': `${progress}%` } as React.CSSProperties}
+      >
+        <span className="stages-map-rail" aria-hidden="true" />
+        {stages.map((item, index) => {
+          const state = index === active ? ' is-active' : index < active ? ' is-done' : ''
+          return (
             <button
               key={item.title}
               type="button"
@@ -86,39 +118,60 @@ export function StagesSection() {
               id={`stage-tab-${index}`}
               aria-selected={index === active}
               aria-controls="stage-panel"
-              className={`stage-tab${index === active ? ' is-active' : ''}${index < active ? ' is-done' : ''}`}
+              className={`stage-node${state}`}
               onClick={() => setActive(index)}
             >
-              <span className="stage-tab-dot" aria-hidden="true" />
-              <span className="stage-tab-num">{pad(index + 1)}</span>
-              <span className="stage-tab-text">
-                <span className="stage-tab-title">{item.title}</span>
-                <span className="stage-tab-short">{item.short}</span>
+              <span className="stage-node-dot" aria-hidden="true">
+                {index < active ? <Check /> : pad(index + 1)}
               </span>
+              <span className="stage-node-title">{item.short}</span>
+              <span className="stage-node-time">{item.duration}</span>
             </button>
-          ))}
+          )
+        })}
+      </div>
+
+      <article className="stage-panel" id="stage-panel" role="tabpanel" aria-labelledby={`stage-tab-${active}`}>
+        <div className="stage-media" key={stage.image}>
+          <Image src={stage.image} alt={stage.alt} fill sizes="(max-width: 1000px) 100vw, 45vw" className="stage-image" />
+          <span className="stage-counter">{pad(active + 1)} <i>/ {pad(stages.length)}</i></span>
         </div>
 
-        <article className="stage-panel" id="stage-panel" role="tabpanel" aria-labelledby={`stage-tab-${active}`}>
-          <div className="stage-media" key={stage.image}>
-            <Image src={stage.image} alt={stage.alt} fill sizes="(max-width: 1000px) 100vw, 55vw" className="stage-image" />
-            <span className="stage-counter">{pad(active + 1)} <i>/ {pad(stages.length)}</i></span>
+        <div className="stage-content" key={stage.title}>
+          <div className="stage-copy">
+            <p className="stage-step-label">Етап {pad(active + 1)}</p>
+            <h3>{stage.title}</h3>
           </div>
-          <div className="stage-content" key={stage.title}>
-            <span className="stage-big-num" aria-hidden="true">{pad(active + 1)}</span>
-            <div className="stage-copy">
-              <h3>{stage.title}</h3>
-              <ul>
-                {stage.points.map((point) => <li key={point}>{point}</li>)}
-              </ul>
+
+          <ol className="stage-flow" aria-label={`Покрокова схема: ${stage.title}`}>
+            {stage.steps.map((step, index) => (
+              <li key={step.title} className="stage-flow-item">
+                <span className="stage-flow-marker" aria-hidden="true">{index + 1}</span>
+                <div>
+                  <p className="stage-flow-title">{step.title}</p>
+                  <p className="stage-flow-text">{step.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <dl className="stage-meta">
+            <div>
+              <dt><Clock aria-hidden="true" /> Термін</dt>
+              <dd>{stage.duration}</dd>
             </div>
-            <div className="stage-controls">
-              <button type="button" onClick={() => go(-1)} aria-label="Попередній етап"><ArrowLeft aria-hidden="true" /></button>
-              <button type="button" onClick={() => go(1)} aria-label="Наступний етап"><ArrowRight aria-hidden="true" /></button>
+            <div>
+              <dt><FileCheck aria-hidden="true" /> Результат</dt>
+              <dd>{stage.result}</dd>
             </div>
+          </dl>
+
+          <div className="stage-controls">
+            <button type="button" onClick={() => go(-1)} aria-label="Попередній етап"><ArrowLeft aria-hidden="true" /></button>
+            <button type="button" onClick={() => go(1)} aria-label="Наступний етап"><ArrowRight aria-hidden="true" /></button>
           </div>
-        </article>
-      </div>
+        </div>
+      </article>
     </section>
   )
 }
