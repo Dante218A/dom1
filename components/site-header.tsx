@@ -17,6 +17,7 @@ import {
 import { LanguageSwitcher } from '@/components/language-switcher'
 import { serviceCategories, serviceHref } from '@/lib/services'
 import { objectCategories, objectHref } from '@/lib/objects'
+import { EXAMPLE_HREF } from '@/lib/design-example'
 import { STUDIO_PHONE, STUDIO_PHONE_HREF, pageHref, siteSections, type SiteSection } from '@/lib/site-pages'
 
 const SERVICES_HREF = '/#services'
@@ -33,6 +34,7 @@ const navItems: NavItem[] = [
   { kind: 'menu', label: 'Про нас', id: 'pro-nas', section: sectionBySlug('pro-nas') },
   { kind: 'mega', label: 'Послуги та ціни', id: 'services' },
   { kind: 'link', label: 'Наші роботи', href: '/#projects' },
+  { kind: 'link', label: 'Приклади проєкту', href: EXAMPLE_HREF },
   { kind: 'mega', label: 'Об’єкти', id: 'objects' },
   { kind: 'link', label: 'Відгуки', href: pageHref('vidhuky'), menuOnly: true },
   { kind: 'link', label: 'Калькулятор', href: '/#calculator' },
