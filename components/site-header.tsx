@@ -38,7 +38,7 @@ const navItems: NavItem[] = [
   { kind: 'menu', label: 'Ціни', id: 'tsiny', section: sectionBySlug('tsiny') },
   { kind: 'menu', label: 'Калькулятори', id: 'kalkuliatory', section: sectionBySlug('kalkuliatory') },
   { kind: 'link', label: 'Акції', href: pageHref('aktsii') },
-  { kind: 'link', label: 'Оплата', href: pageHref('oplata'), emphasis: true },
+  { kind: 'link', label: 'Оплата', href: pageHref('oplata') },
   { kind: 'link', label: 'Блог', href: pageHref('blog') },
   { kind: 'link', label: 'Співпраця', href: pageHref('spivpratsia') },
   { kind: 'link', label: 'Вакансії', href: pageHref('vakansii') },
@@ -217,16 +217,12 @@ export function SiteHeader() {
   function renderSectionPanel(section: SiteSection) {
     return (
       <>
-        <p className="nav-dropdown-title">{section.intro}</p>
         <ul className="simple-menu-list">
           {section.pages.map((page) => (
             <li key={page.slug}>
               <Link href={pageHref(page.slug)} onClick={closeDropdown}>
-                <span className="nav-dropdown-text">
-                  <strong>{page.title}</strong>
-                  <small>{page.description}</small>
-                </span>
-                <ArrowUpRight aria-hidden="true" />
+                <span className="simple-menu-label">{page.title}</span>
+                <ArrowRight aria-hidden="true" />
               </Link>
             </li>
           ))}
