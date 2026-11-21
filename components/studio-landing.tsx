@@ -3,6 +3,8 @@ import { ConsultationForm } from '@/components/consultation-form'
 import { PriceCalculator } from '@/components/price-calculator'
 import { ProjectCarousel } from '@/components/project-carousel'
 import { HeroPhotoCarousel } from '@/components/hero-photo-carousel'
+import { HeroStamp } from '@/components/hero-stamp'
+import { SiteHeader } from '@/components/site-header'
 
 const projects = [
   {
@@ -61,35 +63,28 @@ const services = [
 export function StudioLanding() {
   return (
     <main>
-      <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="huge world of design — на початок сторінки">
-          huge world
-          <small>of design</small>
-        </a>
-        <nav className="main-nav" aria-label="Головна навігація">
-          <a href="#projects">Проєкти</a>
-          <a href="#services">Послуги</a>
-          <a href="#calculator">Калькулятор</a>
-          <a href="#about">Про студію</a>
-        </nav>
-        <a className="header-contact" href="#contact">
-          Обговорити проєкт <ArrowUpRight aria-hidden="true" />
-        </a>
-      </header>
+      <SiteHeader />
 
       <section className="hero" id="top" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <p className="eyebrow"><span className="eyebrow-dot" /> Одеса · Україна · Працюємо всюди</p>
-          <h1 id="hero-title">huge world<br />of <em>design</em></h1>
-          <div className="hero-bottom">
-            <p>Створюємо інтер’єри, що відчуваються вашими — у кожній деталі, фактурі й ранковому промені.</p>
-            <a className="round-link" href="#projects" aria-label="Перейти до проєктів">
+          <p className="eyebrow hero-eyebrow">Одеса · Україна · Працюємо всюди</p>
+          <h1 id="hero-title">Простір,<br />у якому живе<br /><em>затишок</em></h1>
+          <p className="hero-lead">
+            huge world of design — студія інтер’єру, що створює теплі, продумані простори з характером. У кожній деталі, фактурі й ранковому промені.
+          </p>
+          <div className="hero-actions">
+            <a className="pill-button" href="#contact">
+              Почати проєкт <ArrowRight aria-hidden="true" />
+            </a>
+            <a className="round-link" href="#projects" aria-label="Переглянути проєкти">
               <ArrowDownRight aria-hidden="true" />
             </a>
           </div>
         </div>
-        <HeroPhotoCarousel />
-        <div className="hero-index"><span>Інтер’єри з відчуттям дому</span><span>01 — 04</span></div>
+        <div className="hero-visual-wrap">
+          <HeroPhotoCarousel />
+          <HeroStamp />
+        </div>
       </section>
 
       <section className="intro section-shell" id="about" aria-labelledby="intro-title">

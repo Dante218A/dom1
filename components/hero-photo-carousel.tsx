@@ -82,7 +82,11 @@ export function HeroPhotoCarousel() {
         <span>{String(activeIndex + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}</span>
         <span>{slides[activeIndex].caption}</span>
       </div>
-      <span className="hero-stamp" aria-hidden="true">простір<br />для життя</span>
+      <dl className="hero-stats">
+        <div><dt>Реалізованих проєктів</dt><dd>120+</dd></div>
+        <div><dt>Років досвіду</dt><dd>8</dd></div>
+        <div><dt>Міст і країн</dt><dd>15+</dd></div>
+      </dl>
 
       <div className="hero-carousel-controls" role="group" aria-label="Керування каруселлю">
         <button
