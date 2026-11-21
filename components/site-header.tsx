@@ -1,30 +1,62 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
-import { ArrowRight, ArrowUpRight, ChevronDown, ChevronRight, Menu, X } from 'lucide-react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+import {
+  ArrowRight,
+  ArrowUpRight,
+  ChevronDown,
+  ChevronRight,
+  MapPin,
+  Menu,
+  MessageCircle,
+  Phone,
+  Plus,
+  Search,
+  Send,
+  X,
+} from 'lucide-react'
 import { serviceCategories, serviceHref } from '@/lib/services'
 import { objectCategories, objectHref } from '@/lib/objects'
+import { STUDIO_PHONE, STUDIO_PHONE_HREF, pageHref, siteSections, type SiteSection } from '@/lib/site-pages'
 
 const SERVICES_HREF = '/#services'
-const OBJECTS_HREF = '/#objects'
 
-type DropdownId = 'services' | 'objects'
+type NavItem =
+  | { kind: 'link'; label: string; href: string; emphasis?: boolean }
+  | { kind: 'mega'; label: string; id: 'services' | 'objects' }
+  | { kind: 'menu'; label: string; id: string; section: SiteSection }
 
-const links = [
-  { href: '/#projects', label: 'Проєкти' },
-  { href: SERVICES_HREF, label: 'Послуги', dropdown: 'services' as DropdownId },
-  { href: OBJECTS_HREF, label: 'Об’єкти', dropdown: 'objects' as DropdownId },
-  { href: '/#calculator', label: 'Калькулятор' },
-  { href: '/#about', label: 'Про студію' },
+const sectionBySlug = (slug: string) => siteSections.find((section) => section.slug === slug)!
+
+const navItems: NavItem[] = [
+  { kind: 'link', label: 'Наші роботи', href: '/#projects' },
+  { kind: 'mega', label: 'Послуги', id: 'services' },
+  { kind: 'mega', label: 'Об’єкти', id: 'objects' },
+  { kind: 'menu', label: 'Про нас', id: 'pro-nas', section: sectionBySlug('pro-nas') },
+  { kind: 'link', label: 'Відгуки', href: pageHref('vidhuky') },
+  { kind: 'menu', label: 'Ціни', id: 'tsiny', section: sectionBySlug('tsiny') },
+  { kind: 'menu', label: 'Калькулятори', id: 'kalkuliatory', section: sectionBySlug('kalkuliatory') },
+  { kind: 'link', label: 'Акції', href: pageHref('aktsii') },
+  { kind: 'link', label: 'Оплата', href: pageHref('oplata'), emphasis: true },
+  { kind: 'link', label: 'Блог', href: pageHref('blog') },
+  { kind: 'link', label: 'Співпраця', href: pageHref('spivpratsia') },
+  { kind: 'link', label: 'Вакансії', href: pageHref('vakansii') },
+  { kind: 'link', label: 'Контакти', href: pageHref('kontakty') },
+]
+
+const messengers = [
+  { label: 'Telegram', href: 'https://t.me/', icon: Send },
+  { label: 'Viber', href: 'viber://chat?number=%2B380487000000', icon: MessageCircle },
+  { label: 'WhatsApp', href: 'https://wa.me/380487000000', icon: Phone },
 ]
 
 const CLOSE_DELAY_MS = 260
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState<DropdownId | null>(null)
-  const [mobileOpen, setMobileOpen] = useState<DropdownId | null>(null)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [mobileOpen, setMobileOpen] = useState<string | null>(null)
   const [activeObjectCategory, setActiveObjectCategory] = useState(objectCategories[0].slug)
   const navRef = useRef<HTMLElement>(null)
   const openedByHoverRef = useRef(false)
@@ -182,104 +214,179 @@ export function SiteHeader() {
     )
   }
 
+  function renderSectionPanel(section: SiteSection) {
+    return (
+      <>
+        <p className="nav-dropdown-title">{section.intro}</p>
+        <ul className="simple-menu-list">
+          {section.pages.map((page) => (
+            <li key={page.slug}>
+              <Link href={pageHref(page.slug)} onClick={closeDropdown}>
+                <span className="nav-dropdown-text">
+                  <strong>{page.title}</strong>
+                  <small>{page.description}</small>
+                </span>
+                <ArrowUpRight aria-hidden="true" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  function renderDropdown(id: string, label: string, variant: string, panel: ReactNode, trigger: 'chevron' | 'plus') {
+    const isOpen = openDropdown === id
+    return (
+      <div
+        className={`nav-dropdown nav-dropdown--${variant}${isOpen ? ' is-open' : ''}`}
+        key={id}
+        onPointerEnter={(event) => {
+          if (event.pointerType !== 'mouse') return
+          cancelClose()
+          if (!isOpen) openedByHoverRef.current = true
+          setOpenDropdown(id)
+        }}
+        onPointerLeave={(event) => {
+          if (event.pointerType !== 'mouse') return
+          scheduleClose()
+        }}
+      >
+        <button
+          className="nav-dropdown-trigger"
+          type="button"
+          aria-expanded={isOpen}
+          aria-controls={`${id}-dropdown`}
+          onClick={() => {
+            if (openedByHoverRef.current) {
+              openedByHoverRef.current = false
+              setOpenDropdown(id)
+              return
+            }
+            setOpenDropdown(isOpen ? null : id)
+          }}
+        >
+          {label}
+          {trigger === 'plus' ? <Plus aria-hidden="true" /> : <ChevronDown aria-hidden="true" />}
+        </button>
+        <div className={`nav-dropdown-panel nav-dropdown-panel--${variant}`} id={`${id}-dropdown`} hidden={!isOpen}>
+          {panel}
+        </div>
+      </div>
+    )
+  }
+
+  const mobileGroups = (item: NavItem) => {
+    if (item.kind === 'mega' && item.id === 'services') {
+      return serviceCategories.map((category) => ({
+        key: category.title,
+        title: category.title,
+        items: category.items.map((service) => ({ slug: service.slug, title: service.title, href: serviceHref(service.slug), meta: service.price })),
+      }))
+    }
+    if (item.kind === 'mega') {
+      return objectCategories.map((category) => ({
+        key: category.slug,
+        title: category.title,
+        items: category.types.map((type) => ({ slug: type.slug, title: type.title, href: objectHref(type.slug), meta: undefined as string | undefined })),
+      }))
+    }
+    if (item.kind === 'menu') {
+      return [{
+        key: item.section.slug,
+        title: item.section.intro,
+        items: item.section.pages.map((page) => ({ slug: page.slug, title: page.title, href: pageHref(page.slug), meta: undefined as string | undefined })),
+      }]
+    }
+    return []
+  }
+
   return (
     <header className="site-header">
-      <Link className="wordmark" href="/" aria-label="huge world of design — на головну">
-        <span>Huge World</span>
-        <small>of design</small>
-      </Link>
+      <div className="header-top">
+        <Link className="wordmark" href="/" aria-label="huge world of design — на головну">
+          <span>Huge World</span>
+          <small>of design</small>
+        </Link>
+
+        <form className="header-search" action="/poshuk" role="search">
+          <label className="sr-only" htmlFor="header-search-input">Пошук по сайту</label>
+          <Search aria-hidden="true" />
+          <input id="header-search-input" name="q" type="search" placeholder="Пошук…" autoComplete="off" maxLength={80} />
+          <button type="submit" aria-label="Шукати">
+            <ArrowRight aria-hidden="true" />
+          </button>
+        </form>
+
+        <div className="header-utility">
+          <span className="header-city">
+            <MapPin aria-hidden="true" />
+            Одеса
+          </span>
+          <ul className="header-messengers" aria-label="Месенджери">
+            {messengers.map(({ label, href, icon: Icon }) => (
+              <li key={label}>
+                <a href={href} aria-label={label} title={label} target="_blank" rel="noopener noreferrer">
+                  <Icon aria-hidden="true" />
+                </a>
+              </li>
+            ))}
+          </ul>
+          <span className="header-lang" aria-label="Мова сайту: українська">UA</span>
+          <a className="header-phone" href={STUDIO_PHONE_HREF}>{STUDIO_PHONE}</a>
+        </div>
+
+        <div className="header-actions">
+          <a className="header-cta" href="/#contact">
+            <span>Обговорити проєкт</span>
+            <ArrowRight aria-hidden="true" />
+          </a>
+          <button
+            className="menu-button"
+            type="button"
+            aria-expanded={isMenuOpen}
+            aria-controls="site-menu"
+            aria-label={isMenuOpen ? 'Закрити меню' : 'Відкрити меню'}
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+          </button>
+        </div>
+      </div>
 
       <nav className="main-nav" aria-label="Головна навігація" ref={navRef}>
-        {links.map((link) => {
-          const id = link.dropdown
-          if (!id) return <a href={link.href} key={link.href}>{link.label}</a>
-          const isOpen = openDropdown === id
-          return (
-            <div
-              className={`nav-dropdown${isOpen ? ' is-open' : ''}`}
-              key={link.href}
-              onPointerEnter={(event) => {
-                if (event.pointerType !== 'mouse') return
-                cancelClose()
-                if (!isOpen) openedByHoverRef.current = true
-                setOpenDropdown(id)
-              }}
-              onPointerLeave={(event) => {
-                if (event.pointerType !== 'mouse') return
-                scheduleClose()
-              }}
-            >
-              <button
-                className="nav-dropdown-trigger"
-                type="button"
-                aria-expanded={isOpen}
-                aria-controls={`${id}-dropdown`}
-                onClick={() => {
-                  if (openedByHoverRef.current) {
-                    openedByHoverRef.current = false
-                    setOpenDropdown(id)
-                    return
-                  }
-                  setOpenDropdown(isOpen ? null : id)
-                }}
-              >
-                {link.label}
-                <ChevronDown aria-hidden="true" />
-              </button>
-              <div
-                className={`nav-dropdown-panel${id === 'objects' ? ' nav-dropdown-panel--objects' : ''}`}
-                id={`${id}-dropdown`}
-                hidden={!isOpen}
-              >
-                {id === 'services' ? renderServicesPanel() : renderObjectsPanel()}
-              </div>
-            </div>
-          )
+        {navItems.map((item) => {
+          if (item.kind === 'link') {
+            return (
+              <Link className={item.emphasis ? 'is-emphasis' : undefined} href={item.href} key={item.label}>
+                {item.label}
+              </Link>
+            )
+          }
+          if (item.kind === 'mega') {
+            return item.id === 'services'
+              ? renderDropdown('services', item.label, 'accent', renderServicesPanel(), 'plus')
+              : renderDropdown('objects', item.label, 'objects', renderObjectsPanel(), 'chevron')
+          }
+          return renderDropdown(item.id, item.label, 'simple', renderSectionPanel(item.section), 'chevron')
         })}
       </nav>
 
-      <div className="header-actions">
-        <a className="header-cta" href="/#contact">
-          <span>Обговорити проєкт</span>
-          <ArrowRight aria-hidden="true" />
-        </a>
-        <button
-          className="menu-button"
-          type="button"
-          aria-expanded={isMenuOpen}
-          aria-controls="site-menu"
-          aria-label={isMenuOpen ? 'Закрити меню' : 'Відкрити меню'}
-          onClick={() => setIsMenuOpen((open) => !open)}
-        >
-          {isMenuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-        </button>
-      </div>
-
       <div className={`site-menu${isMenuOpen ? ' is-open' : ''}`} id="site-menu" hidden={!isMenuOpen}>
         <nav aria-label="Меню сайту">
-          {links.map((link, index) => {
-            const id = link.dropdown
-            if (!id) {
+          {navItems.map((item, index) => {
+            const number = <span>{String(index + 1).padStart(2, '0')}</span>
+            if (item.kind === 'link') {
               return (
-                <a href={link.href} key={link.href} onClick={closeMobileMenu}>
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  {link.label}
-                </a>
+                <Link href={item.href} key={item.label} onClick={closeMobileMenu}>
+                  {number}
+                  {item.label}
+                </Link>
               )
             }
-            const groups = id === 'services'
-              ? serviceCategories.map((category) => ({
-                  key: category.title,
-                  title: category.title,
-                  items: category.items.map((item) => ({ slug: item.slug, title: item.title, href: serviceHref(item.slug), meta: item.price })),
-                }))
-              : objectCategories.map((category) => ({
-                  key: category.slug,
-                  title: category.title,
-                  items: category.types.map((type) => ({ slug: type.slug, title: type.title, href: objectHref(type.slug), meta: undefined })),
-                }))
+            const id = item.id
             return (
-              <div className="site-menu-group" key={link.href}>
+              <div className="site-menu-group" key={id}>
                 <button
                   className="site-menu-toggle"
                   type="button"
@@ -287,20 +394,20 @@ export function SiteHeader() {
                   aria-controls={`site-menu-${id}`}
                   onClick={() => setMobileOpen((open) => (open === id ? null : id))}
                 >
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  {link.label}
+                  {number}
+                  {item.label}
                   <ChevronDown aria-hidden="true" />
                 </button>
                 <ul id={`site-menu-${id}`} hidden={mobileOpen !== id}>
-                  {groups.map((group) => (
+                  {mobileGroups(item).map((group) => (
                     <li className="site-menu-category" key={group.key}>
                       <p>{group.title}</p>
                       <ul>
-                        {group.items.map((item) => (
-                          <li key={item.slug}>
-                            <Link href={item.href} onClick={closeMobileMenu}>
-                              {item.title}
-                              {item.meta && <small>{item.meta}</small>}
+                        {group.items.map((entry) => (
+                          <li key={entry.slug}>
+                            <Link href={entry.href} onClick={closeMobileMenu}>
+                              {entry.title}
+                              {entry.meta && <small>{entry.meta}</small>}
                             </Link>
                           </li>
                         ))}
@@ -311,12 +418,11 @@ export function SiteHeader() {
               </div>
             )
           })}
-          <a href="/#contact" onClick={closeMobileMenu}>
-            <span>{String(links.length + 1).padStart(2, '0')}</span>
-            Контакти
-          </a>
         </nav>
-        <p>Одеса · Україна<br />Працюємо всюди</p>
+        <p>
+          Одеса · Україна<br />
+          <a href={STUDIO_PHONE_HREF}>{STUDIO_PHONE}</a>
+        </p>
       </div>
     </header>
   )
