@@ -40,8 +40,7 @@ export const siteSections: SiteSection[] = [
     intro: 'Швидкий орієнтир вартості без дзвінка.',
     pages: [
       { slug: 'kalkuliator-dyzainu', title: 'Калькулятор дизайну', description: 'Вартість проєкту за площею та послугами.' },
-      { slug: 'kalkuliator-komplektatsii', title: 'Калькулятор комплектації', description: 'Бюджет на матеріали, меблі та логістику.' },
-      { slug: 'kalkuliator-remontu', title: 'Калькулятор ремонту', description: 'Орієнтовна вартість будівельних робіт.' },
+
     ],
   },
 ]
