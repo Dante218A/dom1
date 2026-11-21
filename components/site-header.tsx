@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { ArrowRight, Menu, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react'
 
 const links = [
   { href: '#projects', label: 'Проєкти' },
@@ -10,17 +10,40 @@ const links = [
   { href: '#about', label: 'Про студію' },
 ]
 
+const propertyTypes = [
+  { label: 'Новобудова', note: 'Інтер’єр з нуля після забудовника' },
+  { label: 'Вторинне житло', note: 'Оновлення та перепланування' },
+  { label: 'Будинок', note: 'Цілісний простір для родини' },
+  { label: 'Комерційне приміщення', note: 'Офіси, кав’ярні, салони' },
+]
+
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isServicesOpen, setIsServicesOpen] = useState(false)
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false)
+  const servicesRef = useRef<HTMLDivElement>(null)
+  const openedByHoverRef = useRef(false)
 
   useEffect(() => {
-    if (!isMenuOpen) return
+    if (!isMenuOpen && !isServicesOpen) return
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') setIsMenuOpen(false)
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false)
+        setIsServicesOpen(false)
+      }
+    }
+    function handlePointerDown(event: PointerEvent) {
+      if (servicesRef.current && !servicesRef.current.contains(event.target as Node)) {
+        setIsServicesOpen(false)
+      }
     }
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isMenuOpen])
+    window.addEventListener('pointerdown', handlePointerDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('pointerdown', handlePointerDown)
+    }
+  }, [isMenuOpen, isServicesOpen])
 
   return (
     <header className="site-header">
@@ -30,9 +53,66 @@ export function SiteHeader() {
       </a>
 
       <nav className="main-nav" aria-label="Головна навігація">
-        {links.map((link) => (
-          <a href={link.href} key={link.href}>{link.label}</a>
-        ))}
+        {links.map((link) =>
+          link.href === '#services' ? (
+            <div
+              className={`nav-dropdown${isServicesOpen ? ' is-open' : ''}`}
+              key={link.href}
+              ref={servicesRef}
+              onPointerEnter={(event) => {
+                if (event.pointerType !== 'mouse') return
+                openedByHoverRef.current = true
+                setIsServicesOpen(true)
+              }}
+              onPointerLeave={(event) => {
+                if (event.pointerType !== 'mouse') return
+                openedByHoverRef.current = false
+                setIsServicesOpen(false)
+              }}
+            >
+              <button
+                className="nav-dropdown-trigger"
+                type="button"
+                aria-expanded={isServicesOpen}
+                aria-controls="services-dropdown"
+                onClick={() => {
+                  if (openedByHoverRef.current) {
+                    openedByHoverRef.current = false
+                    setIsServicesOpen(true)
+                    return
+                  }
+                  setIsServicesOpen((open) => !open)
+                }}
+              >
+                {link.label}
+                <ChevronDown aria-hidden="true" />
+              </button>
+              <div className="nav-dropdown-panel" id="services-dropdown" hidden={!isServicesOpen}>
+                <p className="nav-dropdown-title">Тип приміщення</p>
+                <ul>
+                  {propertyTypes.map((type, index) => (
+                    <li key={type.label}>
+                      <a href="#services" onClick={() => setIsServicesOpen(false)}>
+                        <span className="nav-dropdown-index">{String(index + 1).padStart(2, '0')}</span>
+                        <span className="nav-dropdown-text">
+                          <strong>{type.label}</strong>
+                          <small>{type.note}</small>
+                        </span>
+                        <ArrowRight aria-hidden="true" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <a className="nav-dropdown-all" href="#services" onClick={() => setIsServicesOpen(false)}>
+                  Усі послуги
+                  <ArrowRight aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          ) : (
+            <a href={link.href} key={link.href}>{link.label}</a>
+          ),
+        )}
       </nav>
 
       <div className="header-actions">
@@ -54,12 +134,35 @@ export function SiteHeader() {
 
       <div className={`site-menu${isMenuOpen ? ' is-open' : ''}`} id="site-menu" hidden={!isMenuOpen}>
         <nav aria-label="Меню сайту">
-          {links.map((link, index) => (
-            <a href={link.href} key={link.href} onClick={() => setIsMenuOpen(false)}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              {link.label}
-            </a>
-          ))}
+          {links.map((link, index) =>
+            link.href === '#services' ? (
+              <div className="site-menu-group" key={link.href}>
+                <button
+                  className="site-menu-toggle"
+                  type="button"
+                  aria-expanded={isMobileServicesOpen}
+                  aria-controls="site-menu-services"
+                  onClick={() => setIsMobileServicesOpen((open) => !open)}
+                >
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  {link.label}
+                  <ChevronDown aria-hidden="true" />
+                </button>
+                <ul id="site-menu-services" hidden={!isMobileServicesOpen}>
+                  {propertyTypes.map((type) => (
+                    <li key={type.label}>
+                      <a href="#services" onClick={() => setIsMenuOpen(false)}>{type.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <a href={link.href} key={link.href} onClick={() => setIsMenuOpen(false)}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                {link.label}
+              </a>
+            ),
+          )}
           <a href="#contact" onClick={() => setIsMenuOpen(false)}>
             <span>05</span>
             Контакти
