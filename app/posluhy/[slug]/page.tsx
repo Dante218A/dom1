@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { SiteHeader } from '@/components/site-header'
+import { SiteFooter } from '@/components/site-footer'
 import { findService, serviceCategories, serviceHref } from '@/lib/services'
 
 type PageProps = { params: Promise<{ slug: string }> }
@@ -87,6 +88,7 @@ export default async function ServicePage({ params }: PageProps) {
           <ArrowLeft aria-hidden="true" /> Усі послуги
         </Link>
       </section>
+      <SiteFooter />
     </main>
   )
 }

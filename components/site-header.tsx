@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { BrandLogo } from '@/components/brand-logo'
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import {
   ArrowRight,
@@ -300,9 +301,8 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="header-top">
-        <Link className="wordmark" href="/" aria-label="huge world of design — на головну">
-          <span>Huge World</span>
-          <small>of design</small>
+        <Link className="brand-link" href="/" aria-label="huge world of design — на головну">
+          <BrandLogo />
         </Link>
 
         <form className="header-search" action="/poshuk" role="search">

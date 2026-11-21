@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowUpRight, Clock, Mail, MapPin, Phone } from 'lucide-react'
+import { BrandLogo } from '@/components/brand-logo'
 import { STUDIO_PHONE, STUDIO_PHONE_HREF, pageHref, siteSections, standalonePages } from '@/lib/site-pages'
 
 const socials = [
@@ -12,12 +13,12 @@ const socials = [
 ]
 
 const anchorLinks = [
-  { label: 'Наш підхід', href: '#about' },
-  { label: 'Проєкти', href: '#projects' },
-  { label: 'Послуги', href: '#services' },
-  { label: 'Етапи роботи', href: '#stages' },
-  { label: 'Калькулятор', href: '#calculator' },
-  { label: 'Зв’язатися', href: '#contact' },
+  { label: 'Наш підхід', href: '/#about' },
+  { label: 'Проєкти', href: '/#projects' },
+  { label: 'Послуги', href: '/#services' },
+  { label: 'Етапи роботи', href: '/#stages' },
+  { label: 'Калькулятор', href: '/#calculator' },
+  { label: 'Зв’язатися', href: '/#contact' },
 ]
 
 const STUDIO_ADDRESS = 'вул. Дерибасівська, 12, Одеса'
@@ -33,7 +34,9 @@ export function SiteFooter() {
 
       <div className="footer-top">
         <div className="footer-brand">
-          <a className="wordmark footer-wordmark" href="#top">huge world<small>of design</small></a>
+          <Link className="brand-link" href="/" aria-label="huge world of design — на головну">
+            <BrandLogo tone="light" className="brand-logo--footer" />
+          </Link>
           <p>Студія інтер’єру, що створює теплі, продумані простори з характером. Одеса, Україна та весь світ.</p>
           <ul className="footer-socials" aria-label="Соціальні мережі">
             {socials.map((social) => (

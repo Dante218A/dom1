@@ -135,6 +135,40 @@
   letter-spacing: 0.5em;
   text-transform: uppercase;
 }
+.brand-link { display: inline-flex; color: inherit; }
+.brand-logo { display: inline-flex; align-items: center; gap: 14px; color: var(--foreground); }
+.brand-logo .brand-mark { width: 42px; height: 53px; flex-shrink: 0; color: var(--accent); transition: transform 400ms ease; }
+.brand-link:hover .brand-mark { transform: translateY(-2px); }
+.brand-logo-text { display: flex; flex-direction: column; align-items: center; padding-left: 14px; border-left: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); }
+.brand-logo-name { font: 400 22px/1 Georgia, 'Times New Roman', serif; letter-spacing: 0.28em; text-transform: uppercase; white-space: nowrap; }
+.brand-logo-sub {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 7px;
+  color: var(--accent);
+  font: italic 400 11px/1 Georgia, 'Times New Roman', serif;
+  letter-spacing: 0.42em;
+  text-transform: lowercase;
+}
+.brand-logo-sub::before,
+.brand-logo-sub::after { content: ''; width: 16px; height: 1px; background: currentColor; opacity: 0.6; }
+.brand-logo--light { color: var(--primary-foreground); }
+.brand-logo--light .brand-mark,
+.brand-logo--light .brand-logo-sub { color: color-mix(in srgb, var(--accent) 55%, var(--primary-foreground)); }
+.brand-logo--footer .brand-mark { width: 52px; height: 65px; }
+.brand-logo--footer .brand-logo-name { font-size: 28px; }
+
+.brand-mark-arch { fill: none; stroke: currentColor; stroke-width: 1.2; }
+.brand-mark-arch--inner { stroke-width: 0.6; opacity: 0.7; }
+.brand-mark-gem { fill: currentColor; }
+.brand-mark-rule { stroke: currentColor; stroke-width: 0.8; }
+.brand-mark-h,
+.brand-mark-w { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+.brand-mark-h { fill: var(--foreground); font-size: 30px; }
+.brand-mark-w { fill: currentColor; font-size: 22px; font-style: italic; }
+.brand-logo--light .brand-mark-h { fill: var(--primary-foreground); }
+
 .main-nav {
   display: flex;
   align-items: center;
@@ -593,7 +627,7 @@
   animation: stamp-spin 24s linear infinite;
 }
 .hero-stamp-ring text { fill: var(--foreground); font: 10.4px Arial, Helvetica, sans-serif; letter-spacing: 0.28em; text-transform: uppercase; }
-.hero-stamp-icon { width: 34px; height: 34px; stroke-width: 1.2; }
+.hero-stamp-mark { position: relative; width: 40px; height: 50px; color: var(--accent); }
 @keyframes stamp-spin { to { transform: rotate(360deg); } }
 .hero-index {
   position: absolute;
@@ -1017,6 +1051,13 @@ input:focus-visible + .calc-box { outline: 2px solid var(--ring); outline-offset
   .site-header { min-height: 0; padding: 16px 6vw; gap: 12px; }
   .header-search, .header-utility { display: none; }
   .wordmark { font-size: 17px; letter-spacing: 0.22em; }
+  .brand-logo { gap: 10px; }
+  .brand-logo .brand-mark { width: 28px; height: 35px; }
+  .brand-logo-text { padding-left: 10px; }
+  .brand-logo-name { font-size: 15px; letter-spacing: 0.2em; }
+  .brand-logo-sub { margin-top: 5px; font-size: 9px; letter-spacing: 0.32em; gap: 6px; }
+  .brand-logo-sub::before,
+  .brand-logo-sub::after { width: 10px; }
   .wordmark small { font-size: 7px; letter-spacing: 0.42em; }
   .header-actions { gap: 8px; }
   .header-cta { min-height: 44px; padding: 0 16px; gap: 10px; font-size: 12px; }
@@ -1033,7 +1074,7 @@ input:focus-visible + .calc-box { outline: 2px solid var(--ring); outline-offset
   .round-link { width: 42px; height: 42px; flex-basis: 42px; }
   .hero-visual { min-height: 440px; height: 118vw; max-height: 650px; border-radius: 46% 24px 24px 80px / 26% 24px 24px 80px; }
   .hero-stamp { top: -36px; left: auto; right: 6px; width: 96px; height: 96px; }
-  .hero-stamp-icon { width: 24px; height: 24px; }
+  .hero-stamp-mark { width: 28px; height: 35px; }
   .hero-stats { right: 12px; bottom: 12px; left: 12px; padding: 14px 4px; border-radius: 24px; }
   .hero-stats div { padding: 0 10px; }
   .hero-stats dd { font-size: 22px; }

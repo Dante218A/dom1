@@ -1,4 +1,4 @@
-import { Sprout } from 'lucide-react'
+import { BrandMark } from '@/components/brand-logo'
 
 export function HeroStamp() {
   return (
@@ -7,13 +7,13 @@ export function HeroStamp() {
         <defs>
           <path id="hero-stamp-circle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" />
         </defs>
-        <text>
+        <text textLength="286" lengthAdjust="spacing">
           <textPath href="#hero-stamp-circle" startOffset="0">
-            простір для життя • huge world of design •
+            huge world of design • huge world of design •
           </textPath>
         </text>
       </svg>
-      <Sprout className="hero-stamp-icon" />
+      <BrandMark className="hero-stamp-mark" />
     </div>
   )
 }

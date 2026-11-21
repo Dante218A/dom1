@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { SiteHeader } from '@/components/site-header'
+import { SiteFooter } from '@/components/site-footer'
 import { serviceCategories, serviceHref } from '@/lib/services'
 import { objectCategories, objectHref } from '@/lib/objects'
 import { allSitePages, pageHref } from '@/lib/site-pages'
@@ -72,6 +73,7 @@ export default async function SearchPage({ searchParams }: SearchProps) {
           </div>
         )}
       </section>
+      <SiteFooter />
     </main>
   )
 }
