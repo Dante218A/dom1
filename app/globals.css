@@ -160,7 +160,7 @@
 .brand-logo--footer .brand-mark { width: 52px; height: 65px; }
 .brand-logo--footer .brand-logo-name { font-size: 28px; }
 
-.brand-mark-ring { fill: var(--primary); stroke: currentColor; stroke-width: 1.2; }
+.brand-mark-ring { fill: none; stroke: currentColor; stroke-width: 1.2; }
 .brand-mark-ring--inner { fill: none; stroke-width: 0.5; opacity: 0.8; }
 .brand-mark-roof { fill: none; stroke: currentColor; stroke-width: 1.1; stroke-linejoin: miter; }
 .brand-mark-gem { fill: currentColor; }
