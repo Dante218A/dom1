@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react'
+import { serviceCategories } from '@/lib/services'
 
 const links = [
   { href: '#projects', label: 'Проєкти' },
@@ -10,12 +11,6 @@ const links = [
   { href: '#about', label: 'Про студію' },
 ]
 
-const propertyTypes = [
-  { label: 'Новобудова', note: 'Інтер’єр з нуля після забудовника' },
-  { label: 'Вторинне житло', note: 'Оновлення та перепланування' },
-  { label: 'Будинок', note: 'Цілісний простір для родини' },
-  { label: 'Комерційне приміщення', note: 'Офіси, кав’ярні, салони' },
-]
 
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -88,25 +83,37 @@ export function SiteHeader() {
                 <ChevronDown aria-hidden="true" />
               </button>
               <div className="nav-dropdown-panel" id="services-dropdown" hidden={!isServicesOpen}>
-                <p className="nav-dropdown-title">Тип приміщення</p>
-                <ul>
-                  {propertyTypes.map((type, index) => (
-                    <li key={type.label}>
-                      <a href="#services" onClick={() => setIsServicesOpen(false)}>
-                        <span className="nav-dropdown-index">{String(index + 1).padStart(2, '0')}</span>
-                        <span className="nav-dropdown-text">
-                          <strong>{type.label}</strong>
-                          <small>{type.note}</small>
-                        </span>
-                        <ArrowRight aria-hidden="true" />
-                      </a>
-                    </li>
+                <div className="mega-grid">
+                  {serviceCategories.map((category, index) => (
+                    <section className="mega-column" key={category.title} aria-labelledby={`mega-${index}`}>
+                      <span className="nav-dropdown-index">{String(index + 1).padStart(2, '0')}</span>
+                      <h3 id={`mega-${index}`}>{category.title}</h3>
+                      <p className="mega-intro">{category.intro}</p>
+                      <ul>
+                        {category.items.map((item) => (
+                          <li key={item.title}>
+                            <a href="#services" onClick={() => setIsServicesOpen(false)}>
+                              <strong>{item.title}</strong>
+                              <small>{item.description}</small>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </section>
                   ))}
-                </ul>
-                <a className="nav-dropdown-all" href="#services" onClick={() => setIsServicesOpen(false)}>
-                  Усі послуги
-                  <ArrowRight aria-hidden="true" />
-                </a>
+                </div>
+                <div className="mega-footer">
+                  <p>Не знаєте, що обрати? Розрахуйте вартість або напишіть нам — підкажемо.</p>
+                  <div className="mega-footer-actions">
+                    <a className="mega-link" href="#calculator" onClick={() => setIsServicesOpen(false)}>
+                      Калькулятор
+                    </a>
+                    <a className="nav-dropdown-all" href="#services" onClick={() => setIsServicesOpen(false)}>
+                      Усі послуги
+                      <ArrowRight aria-hidden="true" />
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           ) : (
@@ -149,9 +156,16 @@ export function SiteHeader() {
                   <ChevronDown aria-hidden="true" />
                 </button>
                 <ul id="site-menu-services" hidden={!isMobileServicesOpen}>
-                  {propertyTypes.map((type) => (
-                    <li key={type.label}>
-                      <a href="#services" onClick={() => setIsMenuOpen(false)}>{type.label}</a>
+                  {serviceCategories.map((category) => (
+                    <li className="site-menu-category" key={category.title}>
+                      <p>{category.title}</p>
+                      <ul>
+                        {category.items.map((item) => (
+                          <li key={item.title}>
+                            <a href="#services" onClick={() => setIsMenuOpen(false)}>{item.title}</a>
+                          </li>
+                        ))}
+                      </ul>
                     </li>
                   ))}
                 </ul>
