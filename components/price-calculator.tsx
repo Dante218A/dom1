@@ -93,7 +93,7 @@ export function PriceCalculator() {
   return (
     <section className="price-calculator section-shell" id="calculator" aria-labelledby="calculator-title">
       <div className="calculator-intro">
-        <p className="eyebrow section-kicker">04 / Орієнтир за вартістю</p>
+        <p className="eyebrow section-kicker">07 / Орієнтир за вартістю</p>
         <h2 id="calculator-title">Порахуємо<br />ваш <em>простір.</em></h2>
         <p>Оберіть тип об’єкта та потрібні послуги — окремі пункти або все разом. Калькулятор одразу покаже прорахунок кожного пункту і загальну суму.</p>
         <div className="calculator-caption"><Ruler aria-hidden="true" /><span>Прозоро з першого кроку</span></div>

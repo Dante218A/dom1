@@ -86,21 +86,21 @@ export function StudioLanding() {
         <div className="studio-note"><span>Простір із сенсом</span><span>Заснована у 2018</span><span>Одеса · Україна · всюди</span></div>
       </section>
 
-      <ProjectCarousel projects={projects} />
-
-      <TestimonialsSection />
-
       <AdvantagesSection />
 
       <ServicesSection />
 
       <StagesSection />
 
+      <ProjectCarousel projects={projects} />
+
+      <TestimonialsSection />
+
       <PriceCalculator />
 
       <section className="contact-section" id="contact" aria-labelledby="contact-title">
         <div className="contact-copy">
-          <p className="eyebrow contact-kicker"><span className="eyebrow-dot" /> 05 / Почнемо з розмови</p>
+          <p className="eyebrow contact-kicker"><span className="eyebrow-dot" /> 08 / Почнемо з розмови</p>
           <h2 id="contact-title">Маєте місце,<br />яке хочеться <em>відчути?</em></h2>
           <p className="contact-lead">Розкажіть трохи про нього — ми зв’яжемося, щоб домовитись про першу зустріч.</p>
           <div className="contact-details">

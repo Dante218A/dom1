@@ -79,7 +79,7 @@ export function ProjectCarousel({ projects }: ProjectCarouselProps) {
     <section className="projects section-shell" id="projects" aria-labelledby="projects-title" aria-roledescription="карусель">
       <div className="section-heading">
         <div>
-          <p className="eyebrow section-kicker">02 / Обране</p>
+          <p className="eyebrow section-kicker">05 / Наші роботи</p>
           <h2 id="projects-title">Простори, що<br /><em>розповідають.</em></h2>
         </div>
         <div className="section-heading-aside">

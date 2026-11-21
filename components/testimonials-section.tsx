@@ -57,7 +57,7 @@ export function TestimonialsSection() {
     <section className="testimonials section-shell" id="reviews" aria-labelledby="testimonials-title">
       <header className="testimonials-head">
         <div>
-          <p className="eyebrow section-kicker">Відгуки клієнтів</p>
+          <p className="eyebrow section-kicker">06 / Відгуки клієнтів</p>
           <h2 id="testimonials-title">Історії людей, які <em>вже живуть</em> у наших інтер’єрах</h2>
         </div>
         <div className="testimonials-rating" aria-label="Середня оцінка 4,9 з 5 за 86 відгуками">

@@ -49,7 +49,7 @@ export function AdvantagesSection() {
   return (
     <section className="advantages section-shell" id="advantages" aria-labelledby="advantages-title">
       <div className="advantages-intro">
-        <p className="eyebrow section-kicker">Чому з нами спокійно</p>
+        <p className="eyebrow section-kicker">02 / Чому з нами спокійно</p>
         <h2 id="advantages-title">Зручно, прозоро <em>і безпечно</em> — на кожному кроці</h2>
         <p className="advantages-lead">
           Ремонт не має бути стресом. Ми беремо на себе контроль бюджету, підрядників і термінів, а вам залишаємо приємні рішення.

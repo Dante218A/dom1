@@ -31,10 +31,10 @@ type NavItem =
 const sectionBySlug = (slug: string) => siteSections.find((section) => section.slug === slug)!
 
 const navItems: NavItem[] = [
-  { kind: 'link', label: 'Наші роботи', href: '/#projects' },
-  { kind: 'mega', label: 'Послуги та ціни', id: 'services' },
-  { kind: 'mega', label: 'Об’єкти', id: 'objects' },
   { kind: 'menu', label: 'Про нас', id: 'pro-nas', section: sectionBySlug('pro-nas') },
+  { kind: 'mega', label: 'Послуги та ціни', id: 'services' },
+  { kind: 'link', label: 'Наші роботи', href: '/#projects' },
+  { kind: 'mega', label: 'Об’єкти', id: 'objects' },
   { kind: 'link', label: 'Відгуки', href: pageHref('vidhuky') },
   { kind: 'link', label: 'Калькулятор', href: '/#calculator' },
   { kind: 'link', label: 'Акції', href: pageHref('aktsii') },

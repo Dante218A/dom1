@@ -1203,7 +1203,7 @@ input:focus-visible + .calc-box { outline: 2px solid var(--ring); outline-offset
 .testimonial-card .testimonial-facts { gap: 22px; padding-top: 18px; }
 .testimonial-card .testimonial-facts dd { font-size: 15px; }
 
-.advantages { padding-top: 140px; padding-bottom: 140px; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 6vw; align-items: start; border-top: 1px solid var(--border); }
+.advantages { padding-top: 140px; padding-bottom: 140px; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 6vw; align-items: start; background: var(--muted); box-shadow: 0 0 0 100vmax var(--muted); clip-path: inset(0 -100vmax); }
 .advantages-intro { position: sticky; top: 120px; display: flex; flex-direction: column; align-items: flex-start; }
 .advantages-lead { margin: 26px 0 0; max-width: 440px; color: var(--muted-foreground); font-size: 15px; line-height: 1.7; }
 .advantages-promises { display: flex; flex-direction: column; gap: 12px; margin: 30px 0 38px; padding: 0; list-style: none; }

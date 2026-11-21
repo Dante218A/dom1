@@ -95,7 +95,7 @@ export function StagesSection() {
     <section className="stages section-shell" id="stages" aria-labelledby="stages-title">
       <header className="stages-head">
         <div>
-          <p className="eyebrow section-kicker">Етапи роботи</p>
+          <p className="eyebrow section-kicker">04 / Етапи роботи</p>
           <h2 id="stages-title">П’ять кроків<br />до вашого <em>інтер’єру.</em></h2>
         </div>
         <p className="stages-lead">Кожен етап завершується погодженням — ви точно знаєте, що отримаєте, ще до початку ремонту.</p>
