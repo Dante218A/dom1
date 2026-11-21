@@ -28,9 +28,9 @@ export const siteSections: SiteSection[] = [
     title: 'Ціни',
     intro: 'Орієнтовна вартість для різних типів об’єктів.',
     pages: [
-      { slug: 'tsiny-kvartyra', title: 'Дизайн квартири', description: 'від 1 650 ₴ / м² за повний проєкт.' },
-      { slug: 'tsiny-budynok', title: 'Дизайн будинку', description: 'від 1 450 ₴ / м² з фасадами й ландшафтом.' },
-      { slug: 'tsiny-komertsiia', title: 'Комерційні приміщення', description: 'від 1 200 ₴ / м² для HoReCa, офісів, ритейлу.' },
+      { slug: 'tsiny-kvartyra', title: 'Дизайн квартири', description: 'від $30 / м² за повний проєкт.' },
+      { slug: 'tsiny-budynok', title: 'Дизайн будинку', description: 'від $27 / м² з фасадами й ландшафтом.' },
+      { slug: 'tsiny-komertsiia', title: 'Комерційні приміщення', description: 'від $22 / м² для HoReCa, офісів, ритейлу.' },
       { slug: 'pakety', title: 'Пакети послуг', description: 'Базовий, стандарт і преміум — що входить.' },
     ],
   },

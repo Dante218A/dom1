@@ -22,25 +22,25 @@ export const serviceCategories: ServiceCategory[] = [
         slug: 'obmiry-ta-planuvannia',
         title: 'Обміри та планування',
         description: 'Заміри приміщення, кілька варіантів розміщення меблів і перегородок з урахуванням ергономіки.',
-        price: 'від 350 ₴ / м²',
+        price: 'від $5 / м²',
       },
       {
         slug: 'kontseptsiia-ta-mudbordy',
         title: 'Концепція та мудборди',
         description: 'Підбір стилю, кольорової гами, текстур та загального настрою інтер’єру.',
-        price: 'від 300 ₴ / м²',
+        price: 'від $4 / м²',
       },
       {
         slug: '3d-vizualizatsiia',
         title: '3D-візуалізація',
         description: 'Фотореалістичні зображення майбутніх кімнат — бачите все ще до ремонту.',
-        price: 'від 700 ₴ / м²',
+        price: 'від $12 / м²',
       },
       {
         slug: 'robocha-dokumentatsiia',
         title: 'Робоча документація',
         description: 'Плани стін, схеми електрики, освітлення, сантехніки, розкладки плитки, розгортки та креслення меблів.',
-        price: 'від 600 ₴ / м²',
+        price: 'від $9 / м²',
       },
     ],
   },
@@ -53,13 +53,13 @@ export const serviceCategories: ServiceCategory[] = [
         slug: 'pidbir-materialiv-ta-mebliv',
         title: 'Підбір матеріалів та меблів',
         description: 'Плитка, паркет, фарба, світильники, дивани — у межах вашого бюджету.',
-        price: 'від 250 ₴ / м²',
+        price: 'від $3 / м²',
       },
       {
         slug: 'koshtorys-i-vidomosti',
         title: 'Кошторис і відомості',
         description: 'Таблиця з артикулами, кількістю, цінами та контактами постачальників.',
-        price: 'від 8 000 ₴',
+        price: 'від $150',
       },
       {
         slug: 'lohistyka-ta-zamovlennia',
@@ -78,19 +78,19 @@ export const serviceCategories: ServiceCategory[] = [
         slug: 'vyizdy-na-obiekt',
         title: 'Виїзди на об’єкт',
         description: 'Перевірка відповідності робіт кресленням, кольорам і матеріалам.',
-        price: '2 500 ₴ / виїзд',
+        price: '$50 / виїзд',
       },
       {
         slug: 'koryhuvannia-proektu',
         title: 'Коригування проєкту',
         description: 'Оперативні зміни в кресленнях, якщо під час ремонту виникли технічні нюанси.',
-        price: 'від 1 200 ₴ / год',
+        price: 'від $20 / год',
       },
       {
         slug: 'konsultatsiia-maistriv',
         title: 'Консультація майстрів',
         description: 'Пояснення складних вузлів будівельникам безпосередньо на місці.',
-        price: '2 000 ₴ / зустріч',
+        price: '$40 / зустріч',
       },
     ],
   },
@@ -103,19 +103,19 @@ export const serviceCategories: ServiceCategory[] = [
         slug: 'razova-konsultatsiia',
         title: 'Разова консультація',
         description: 'Виїзд перед купівлею для оцінки планування або порад щодо кольорів і меблів.',
-        price: '3 000 ₴ / 2 год',
+        price: '$60 / 2 год',
       },
       {
         slug: 'planuvalne-rishennia',
         title: 'Планувальне рішення',
         description: 'Обміри та варіанти розстановки меблів і стін без візуалізацій.',
-        price: 'від 450 ₴ / м²',
+        price: 'від $7 / м²',
       },
       {
         slug: 'dekoruvannia',
         title: 'Декорування (хоумстейджинг)',
         description: 'Оновлення готового інтер’єру текстилем, картинами, світлом і декором — перед продажем чи орендою.',
-        price: 'від 25 000 ₴',
+        price: 'від $800',
       },
     ],
   },
@@ -130,19 +130,25 @@ export type ServiceRate = {
 }
 
 export const serviceRates: Record<string, ServiceRate> = {
-  'obmiry-ta-planuvannia': { rate: 350, unit: 'area' },
-  'kontseptsiia-ta-mudbordy': { rate: 300, unit: 'area' },
-  '3d-vizualizatsiia': { rate: 700, unit: 'area' },
-  'robocha-dokumentatsiia': { rate: 600, unit: 'area' },
-  'pidbir-materialiv-ta-mebliv': { rate: 250, unit: 'area' },
-  'koshtorys-i-vidomosti': { rate: 8000, unit: 'fixed' },
-  'lohistyka-ta-zamovlennia': { rate: 7, unit: 'percent', defaultQuantity: 500000 },
-  'vyizdy-na-obiekt': { rate: 2500, unit: 'visit', defaultQuantity: 4 },
-  'koryhuvannia-proektu': { rate: 1200, unit: 'hour', defaultQuantity: 3 },
-  'konsultatsiia-maistriv': { rate: 2000, unit: 'meeting', defaultQuantity: 2 },
-  'razova-konsultatsiia': { rate: 3000, unit: 'fixed' },
-  'planuvalne-rishennia': { rate: 450, unit: 'area' },
-  dekoruvannia: { rate: 25000, unit: 'fixed' },
+  'obmiry-ta-planuvannia': { rate: 5, unit: 'area' },
+  'kontseptsiia-ta-mudbordy': { rate: 4, unit: 'area' },
+  '3d-vizualizatsiia': { rate: 12, unit: 'area' },
+  'robocha-dokumentatsiia': { rate: 9, unit: 'area' },
+  'pidbir-materialiv-ta-mebliv': { rate: 3, unit: 'area' },
+  'koshtorys-i-vidomosti': { rate: 150, unit: 'fixed' },
+  'lohistyka-ta-zamovlennia': { rate: 7, unit: 'percent', defaultQuantity: 15000 },
+  'vyizdy-na-obiekt': { rate: 50, unit: 'visit', defaultQuantity: 4 },
+  'koryhuvannia-proektu': { rate: 20, unit: 'hour', defaultQuantity: 3 },
+  'konsultatsiia-maistriv': { rate: 40, unit: 'meeting', defaultQuantity: 2 },
+  'razova-konsultatsiia': { rate: 60, unit: 'fixed' },
+  'planuvalne-rishennia': { rate: 7, unit: 'area' },
+  dekoruvannia: { rate: 800, unit: 'fixed' },
+}
+
+const usdNumber = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 })
+
+export function formatUsd(value: number) {
+  return `$${usdNumber.format(value)}`
 }
 
 export function serviceHref(slug: string) {

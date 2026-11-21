@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { SiteHeader } from '@/components/site-header'
 import { SiteFooter } from '@/components/site-footer'
 import { findObjectType, objectCategories, objectHref } from '@/lib/objects'
+import { formatUsd } from '@/lib/services'
 
 type PageProps = { params: Promise<{ slug: string }> }
 
@@ -22,7 +23,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-const BASE_DESIGN_RATE = 2400
+const BASE_DESIGN_RATE = 30
+
+function designRate(coefficient: number) {
+  return formatUsd(Math.round(BASE_DESIGN_RATE * coefficient))
+}
 
 export default async function ObjectTypePage({ params }: PageProps) {
   const { slug } = await params
@@ -31,7 +36,6 @@ export default async function ObjectTypePage({ params }: PageProps) {
 
   const { category, type } = found
   const related = category.types.filter((item) => item.slug !== type.slug)
-  const rate = Math.round((BASE_DESIGN_RATE * type.coefficient) / 10) * 10
 
   return (
     <main>
@@ -54,7 +58,7 @@ export default async function ObjectTypePage({ params }: PageProps) {
           </div>
           <aside className="service-page-card" aria-label="Вартість дизайн-проєкту">
             <span>Дизайн-проєкт</span>
-            <strong>від {new Intl.NumberFormat('uk-UA').format(rate)} ₴ / м²</strong>
+            <strong>від {designRate(type.coefficient)} / м²</strong>
             <p>{category.intro}</p>
             <a className="pill-button" href="/#calculator">
               Розрахувати вартість <ArrowRight aria-hidden="true" />
@@ -79,7 +83,7 @@ export default async function ObjectTypePage({ params }: PageProps) {
                       <p>{item.description}</p>
                     </div>
                     <span className="service-price">
-                      від {new Intl.NumberFormat('uk-UA').format(Math.round((BASE_DESIGN_RATE * item.coefficient) / 10) * 10)} ₴ / м²
+                      від {designRate(item.coefficient)} / м²
                     </span>
                     <span className="service-arrow" aria-hidden="true"><ArrowUpRight /></span>
                   </Link>

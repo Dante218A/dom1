@@ -4,9 +4,8 @@ import Link from 'next/link'
 import { useState, type ChangeEvent } from 'react'
 import { ArrowUpRight, Check, Ruler } from 'lucide-react'
 import { objectCategories, objectHref } from '@/lib/objects'
-import { serviceCategories, serviceHref, serviceRates, type ServiceItem } from '@/lib/services'
+import { formatUsd, serviceCategories, serviceHref, serviceRates, type ServiceItem } from '@/lib/services'
 
-const currency = new Intl.NumberFormat('uk-UA', { maximumFractionDigits: 0 })
 const allServices = serviceCategories.flatMap((category) => category.items)
 const defaultSelection = serviceCategories[0].items.map((item) => item.slug)
 
@@ -14,7 +13,7 @@ const quantityLabels = {
   visit: { label: 'Кількість виїздів', suffix: 'виїзд.', max: 99 },
   hour: { label: 'Кількість годин', suffix: 'год', max: 999 },
   meeting: { label: 'Кількість зустрічей', suffix: 'зустр.', max: 99 },
-  percent: { label: 'Бюджет закупівель', suffix: '₴', max: 99_999_999 },
+  percent: { label: 'Бюджет закупівель', suffix: '$', max: 9_999_999 },
 } as const
 
 type QuantityUnit = keyof typeof quantityLabels
@@ -50,15 +49,15 @@ export function PriceCalculator() {
   function lineFor(item: ServiceItem) {
     const { rate, unit } = serviceRates[item.slug]
     if (unit === 'area') {
-      const adjusted = Math.round((rate * selectedType.coefficient) / 10) * 10
-      return { cost: adjusted * area, detail: `${area} м² × ${currency.format(adjusted)} ₴` }
+      const adjusted = Math.round(rate * selectedType.coefficient * 2) / 2
+      return { cost: Math.round(adjusted * area), detail: `${area} м² × ${formatUsd(adjusted)}` }
     }
     if (unit === 'fixed') return { cost: rate, detail: 'Фіксована вартість' }
     const quantity = quantityOf(item.slug)
     if (unit === 'percent') {
-      return { cost: Math.round((quantity * rate) / 100), detail: `${rate}% від ${currency.format(quantity)} ₴` }
+      return { cost: Math.round((quantity * rate) / 100), detail: `${rate}% від ${formatUsd(quantity)}` }
     }
-    return { cost: rate * quantity, detail: `${quantity} × ${currency.format(rate)} ₴` }
+    return { cost: rate * quantity, detail: `${quantity} × ${formatUsd(rate)}` }
   }
 
   const lines = selectedItems.map((item) => ({ item, ...lineFor(item) }))
@@ -272,7 +271,7 @@ export function PriceCalculator() {
                 <li key={line.item.slug}>
                   <span className="calc-line-title">{line.item.title}</span>
                   <span className="calc-line-detail">{line.detail}</span>
-                  <span className="calc-line-cost">{currency.format(line.cost)} ₴</span>
+                  <span className="calc-line-cost">{formatUsd(line.cost)}</span>
                 </li>
               ))}
             </ul>
@@ -282,14 +281,14 @@ export function PriceCalculator() {
         <div className="calculator-result" aria-live="polite" aria-atomic="true">
           <div className="calculator-result-copy">
             <p>Разом орієнтовно</p>
-            <strong>{lines.length ? `≈ ${currency.format(total)} ₴` : '—'}</strong>
+            <strong>{lines.length ? `≈ ${formatUsd(total)}` : '—'}</strong>
             <span>{lines.length} {lines.length === 1 ? 'послуга' : lines.length < 5 && lines.length > 1 ? 'послуги' : 'послуг'} · {selectedType.title}</span>
           </div>
           <a className="calculator-cta" href="#contact" aria-label="Обговорити розрахунок із дизайнером">
             <span>Обговорити розрахунок</span><ArrowUpRight aria-hidden="true" />
           </a>
         </div>
-        <p className="calculator-disclaimer">Це попередня оцінка. Точна вартість залежить від складу робіт і обговорюється після знайомства з проєктом.</p>
+        <p className="calculator-disclaimer">Це попередня оцінка. Ціни в доларах США за ринком Одеси; оплата можлива в гривнях за курсом НБУ на день платежу. Точна вартість залежить від складу робіт і обговорюється після знайомства з проєктом.</p>
       </div>
     </section>
   )
