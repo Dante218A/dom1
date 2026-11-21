@@ -5,6 +5,7 @@ import { ProjectCarousel } from '@/components/project-carousel'
 import { HeroPhotoCarousel } from '@/components/hero-photo-carousel'
 import { HeroStamp } from '@/components/hero-stamp'
 import { SiteHeader } from '@/components/site-header'
+import { ServicesSection } from '@/components/services-section'
 
 const projects = [
   {
@@ -30,33 +31,6 @@ const projects = [
     area: '74 м²',
     image: '/project-cafe.png',
     alt: 'Інтер’єр кав’ярні зі світлою штукатуркою та бордовою м’якою лавою',
-  },
-]
-
-const services = [
-  {
-    number: '01',
-    title: 'Планувальне рішення',
-    detail: 'Функціональні сценарії, розміщення меблів і 2 варіанти планування.',
-    price: 'від 900 ₴ / м²',
-  },
-  {
-    number: '02',
-    title: 'Повний дизайн-проєкт',
-    detail: 'Від концепції та візуалізацій до креслень для реалізації.',
-    price: 'від 2 400 ₴ / м²',
-  },
-  {
-    number: '03',
-    title: 'Авторський супровід',
-    detail: 'Дбайливо ведемо проєкт на будівництві й допомагаємо з вибором.',
-    price: 'від 18 000 ₴ / місяць',
-  },
-  {
-    number: '04',
-    title: 'Консультація',
-    detail: 'Зустріч онлайн або в студії: розберемо ваш простір і запит.',
-    price: '2 500 ₴ / 90 хв',
   },
 ]
 
@@ -101,25 +75,7 @@ export function StudioLanding() {
 
       <ProjectCarousel projects={projects} />
 
-      <section className="services section-shell" id="services" aria-labelledby="services-title">
-        <div className="services-intro">
-          <p className="eyebrow section-kicker">03 / Як допомагаємо</p>
-          <h2 id="services-title">Від першої<br />ідеї до <em>втілення.</em></h2>
-          <p className="services-copy">Можна почати з одного кроку — ми підберемо формат саме під ваш простір і темп.</p>
-          <a className="text-link" href="#contact">Підібрати послугу <ArrowRight aria-hidden="true" /></a>
-        </div>
-        <div className="service-list">
-          {services.map((service) => (
-            <a className="service-row" href="#contact" key={service.number}>
-              <span className="service-number">{service.number}</span>
-              <div className="service-description"><h3>{service.title}</h3><p>{service.detail}</p></div>
-              <span className="service-price">{service.price}</span>
-              <ArrowUpRight className="service-arrow" aria-hidden="true" />
-            </a>
-          ))}
-          <p className="price-note">* Остаточна вартість залежить від площі та складу робіт.</p>
-        </div>
-      </section>
+      <ServicesSection />
 
       <PriceCalculator />
 
