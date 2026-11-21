@@ -36,7 +36,6 @@ const navItems: NavItem[] = [
   { kind: 'mega', label: 'Об’єкти', id: 'objects' },
   { kind: 'menu', label: 'Про нас', id: 'pro-nas', section: sectionBySlug('pro-nas') },
   { kind: 'link', label: 'Відгуки', href: pageHref('vidhuky') },
-  { kind: 'menu', label: 'Ціни', id: 'tsiny', section: sectionBySlug('tsiny') },
   { kind: 'link', label: 'Калькулятор', href: '/#calculator' },
   { kind: 'link', label: 'Акції', href: pageHref('aktsii') },
   { kind: 'link', label: 'Оплата', href: pageHref('oplata') },
