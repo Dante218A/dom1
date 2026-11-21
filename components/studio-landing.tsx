@@ -6,6 +6,7 @@ import { HeroPhotoCarousel } from '@/components/hero-photo-carousel'
 import { HeroStamp } from '@/components/hero-stamp'
 import { SiteHeader } from '@/components/site-header'
 import { ServicesSection } from '@/components/services-section'
+import { StagesSection } from '@/components/stages-section'
 
 const projects = [
   {
@@ -76,6 +77,8 @@ export function StudioLanding() {
       <ProjectCarousel projects={projects} />
 
       <ServicesSection />
+
+      <StagesSection />
 
       <PriceCalculator />
 
