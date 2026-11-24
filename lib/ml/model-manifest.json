@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "task": "text-generation",
+  "modelId": "onnx-community/LFM2.5-350M-ONNX",
+  "revision": "7dd4999565b0342c381ba90a3d8fc467d6df19c4",
+  "dtype": "q4",
+  "device": "webgpu",
+  "maxNewTokens": 320,
+  "remoteHost": "https://huggingface.co/",
+  "remotePathTemplate": "{model}/resolve/{revision}/",
+  "proxy": null,
+  "cacheName": "transformers-cache",
+  "library": {
+    "transformers": "4.0.0",
+    "onnxruntimeWeb": "1.25.0-dev.20260327-722743c0e2"
+  },
+  "licenses": {
+    "model": "lfm1.0",
+    "transformers": "Apache-2.0",
+    "onnxruntimeWeb": "MIT"
+  },
+  "reference": {
+    "id": "webml-community/lfm2.5-webgpu-summarizer",
+    "revision": "6c8e9d78365c70775e09df95b7c6c72a4d9638ff",
+    "url": "https://huggingface.co/spaces/webml-community/lfm2.5-webgpu-summarizer"
+  },
+  "files": [
+    {
+      "path": "config.json",
+      "kind": "config",
+      "required": true,
+      "size": 1443,
+      "upstream": "present"
+    },
+    {
+      "path": "onnx/model_q4.onnx",
+      "kind": "graph",
+      "required": true,
+      "size": 183442,
+      "upstream": "present"
+    },
+    {
+      "path": "onnx/model_q4.onnx_data",
+      "kind": "weights",
+      "required": true,
+      "size": 293629952,
+      "upstream": "present"
+    },
+    {
+      "path": "generation_config.json",
+      "kind": "config",
+      "required": false,
+      "size": 136,
+      "upstream": "present"
+    },
+    {
+      "path": "tokenizer.json",
+      "kind": "tokenizer",
+      "required": true,
+      "size": 3297793,
+      "upstream": "present"
+    },
+    {
+      "path": "tokenizer_config.json",
+      "kind": "tokenizer",
+      "required": true,
+      "size": 3825,
+      "upstream": "present"
+    }
+  ],
+  "runtime": {
+    "basePath": "/ml-runtime/ort-1.25.0-dev.20260327-722743c0e2/",
+    "files": [
+      {
+        "file": "ort-wasm-simd-threaded.asyncify.mjs",
+        "variant": "asyncify",
+        "role": "mjs",
+        "path": "/ml-runtime/ort-1.25.0-dev.20260327-722743c0e2/ort-wasm-simd-threaded.asyncify.mjs",
+        "size": 47396,
+        "contentType": "text/javascript"
+      },
+      {
+        "file": "ort-wasm-simd-threaded.asyncify.wasm",
+        "variant": "asyncify",
+        "role": "wasm",
+        "path": "/ml-runtime/ort-1.25.0-dev.20260327-722743c0e2/ort-wasm-simd-threaded.asyncify.wasm",
+        "size": 22819905,
+        "contentType": "application/wasm"
+      },
+      {
+        "file": "ort-wasm-simd-threaded.mjs",
+        "variant": "safari",
+        "role": "mjs",
+        "path": "/ml-runtime/ort-1.25.0-dev.20260327-722743c0e2/ort-wasm-simd-threaded.mjs",
+        "size": 24274,
+        "contentType": "text/javascript"
+      },
+      {
+        "file": "ort-wasm-simd-threaded.wasm",
+        "variant": "safari",
+        "role": "wasm",
+        "path": "/ml-runtime/ort-1.25.0-dev.20260327-722743c0e2/ort-wasm-simd-threaded.wasm",
+        "size": 12528402,
+        "contentType": "application/wasm"
+      }
+    ]
+  }
+}
