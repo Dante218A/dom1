@@ -6,8 +6,8 @@ import { STUDIO_PHONE, STUDIO_PHONE_HREF, pageHref, siteSections, standalonePage
 const socials = [
   { label: 'Instagram', href: 'https://instagram.com/' },
   { label: 'Telegram', href: 'https://t.me/' },
-  { label: 'Viber', href: 'viber://chat?number=%2B380487000000' },
-  { label: 'WhatsApp', href: 'https://wa.me/380487000000' },
+  { label: 'Viber', href: 'viber://chat?number=%2B380487007777' },
+  { label: 'WhatsApp', href: 'https://wa.me/380487007777' },
   { label: 'Facebook', href: 'https://facebook.com/' },
   { label: 'Pinterest', href: 'https://pinterest.com/' },
 ]
