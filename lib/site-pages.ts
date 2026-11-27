@@ -68,5 +68,5 @@ export function findSitePage(slug: string) {
 
 export const allSitePages = [...siteSections.flatMap((section) => section.pages), ...standalonePages]
 
-export const STUDIO_PHONE = '+380 (48) 700-00-00'
-export const STUDIO_PHONE_HREF = 'tel:+380487000000'
+export const STUDIO_PHONE = '+380 (48) 700-77-77'
+export const STUDIO_PHONE_HREF = 'tel:+380487007777'
